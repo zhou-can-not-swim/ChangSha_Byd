@@ -1,18 +1,19 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div>这是changsha_byd---vue3</div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+<script setup>
+import service from '@/utils/http';
+import { ref, computed, onMounted } from 'vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+onMounted(() => {
+  service.get('/test').then(res => {
+    console.log(res);
+  })
+})
+
+
+
 </script>
+
+<style scoped></style>
