@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Extends\PlcServices\QHServices\" />
     <Folder Include="Protocols\CWStocker\" />
   </ItemGroup>

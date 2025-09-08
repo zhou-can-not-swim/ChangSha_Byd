@@ -4,6 +4,36 @@
     "title": "ChangSha_Byd_NetCore8",
     "version": "1.0"
   },
-  "paths": { },
+  "paths": {
+    "/api/test": {
+      "get": {
+        "tags": [
+          "TestHome"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "components": { }
 }

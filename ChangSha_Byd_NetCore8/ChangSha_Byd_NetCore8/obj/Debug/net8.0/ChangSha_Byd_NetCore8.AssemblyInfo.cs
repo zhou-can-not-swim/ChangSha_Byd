@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChangSha_Byd_NetCore8")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e82aae13c19b1a4801f923c36687f35bddc240c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f79a085dc01e1b432cd44d31fa3a7d78cfaf752")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChangSha_Byd_NetCore8")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChangSha_Byd_NetCore8")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
