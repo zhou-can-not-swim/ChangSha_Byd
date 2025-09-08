@@ -1,6 +1,0 @@
-@ChangSha_Byd_NetCore8_HostAddress = http://localhost:5084
-
-GET {{ChangSha_Byd_NetCore8_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
