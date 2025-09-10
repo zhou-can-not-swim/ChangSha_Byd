@@ -29,14 +29,11 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response) => {
-    // 对响应数据做点什么
-    // const { status, message } = response.data
-    // if (status == "200") {
-    //   return response.data
-    // } else {
-    //   alert("http.js-->响应失败:"+response.data.message)
-    // }
-    return response
+    if(response.status != 200){
+      alert("http.js-->响应失败:"+response.status)
+    }else{
+      return response.data
+    }
   }
 )
 
