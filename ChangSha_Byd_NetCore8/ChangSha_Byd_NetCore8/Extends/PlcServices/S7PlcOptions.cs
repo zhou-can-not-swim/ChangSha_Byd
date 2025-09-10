@@ -13,7 +13,7 @@
             return services;
         }
 
-        //todo 这个是不是没有使用到
+        //TODO 这个是不是没有使用到
         public static IServiceCollection AddS7PlcOptions(this IServiceCollection services, Action<S7PlcOptsBuilder> configure)
         {
             ///S7PlcOptsBuilder是用来构建PLC配置的

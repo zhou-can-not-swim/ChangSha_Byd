@@ -1,0 +1,5 @@
+2025-09-10 16:32:07,407 [1] WARN   - You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-10 16:32:07,667 [1] INFO   - Now listening on: http://localhost:8081
+2025-09-10 16:32:07,719 [1] INFO   - Application started. Press Ctrl+C to shut down.
+2025-09-10 16:32:07,721 [1] INFO   - Hosting environment: Development
+2025-09-10 16:32:07,722 [1] INFO   - Content root path: C:\Users\qiyu.zhou\Desktop\Changsha_Byd\ChangSha_Byd_NetCore8\ChangSha_Byd_NetCore8

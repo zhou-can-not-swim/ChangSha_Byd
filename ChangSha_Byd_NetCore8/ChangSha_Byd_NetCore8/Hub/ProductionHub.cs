@@ -1,4 +1,5 @@
 ﻿using ChangSha_Byd_NetCore8.Extends.Scan;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Log;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChangSha_Byd_NetCore8.Hub
@@ -16,12 +17,12 @@ namespace ChangSha_Byd_NetCore8.Hub
         ///// <returns></returns>
         //Task showAlarmMsg(AlarmMessage alarmmsg);
 
-        ///// <summary>
-        ///// 显示信息
-        ///// </summary>
-        ///// <param name="msg"></param>
-        ///// <returns></returns>
-        //Task showMsg(LogMessage alarmmsg);
+        /// <summary>
+        /// 显示信息
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        Task showMsg(LogMessage alarmmsg);
 
     }
 

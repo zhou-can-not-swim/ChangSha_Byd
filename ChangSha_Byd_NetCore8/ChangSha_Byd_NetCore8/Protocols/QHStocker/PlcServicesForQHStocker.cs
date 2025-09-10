@@ -1,4 +1,5 @@
 ﻿using ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares.PublishNotification;
 
 namespace ChangSha_Byd_NetCore8.Protocols.QHStocker
 {
@@ -17,7 +18,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker
             services.AddSingleton<ScanProcessor>();
 
             #region 中间件
-            //services.AddScoped<PublishNotificationMiddleware>();
+            services.AddScoped<PublishNotificationMiddleware>();
             services.AddScoped<EntryArrivedMiddleware>();
             //services.AddScoped<RequestTaskMiddleware>();
             services.AddScoped<RequestOutTaskMiddleware>();

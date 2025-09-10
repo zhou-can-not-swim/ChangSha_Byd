@@ -1,6 +1,7 @@
 ﻿using ChangSha_Byd_NetCore8.Extends.Scan;
 using ChangSha_Byd_NetCore8.fan.middlewares;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares.PublishNotification;
 
 namespace ChangSha_Byd_NetCore8.Protocols.QHStocker
 {
@@ -12,7 +13,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker
         private WorkDelegate<ScanContext> BuildContainer()
         {
             var container = new WorkBuilder<ScanContext>()
-              //.Use<PublishNotificationMiddleware>()//发布消息给Web
+                  .Use<PublishNotificationMiddleware>()//发布消息给Web
                   .Use<EntryArrivedMiddleware>()//就位请求
                   .Use<RequestOutTaskMiddleware>()//请求出库
                   .Use<SendTaskMiddleware>()//发送任务
