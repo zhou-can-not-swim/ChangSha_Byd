@@ -110,8 +110,8 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Mst
         /// </summary>
         public short TaskRFID => msg.Core.TaskRFID;
 
-        public MstInfo_Gateway EC010_A库口 => new MstInfo_Gateway(ref msg.GateWay.EC010_A库口);
-        public MstInfo_Gateway EC010_B库口 => new MstInfo_Gateway(ref msg.GateWay.EC010_B库口);
+        public MstInfo_Gateway EC010_A库口 => new MstInfo_Gateway(msg.GateWay.EC010_A库口);
+        public MstInfo_Gateway EC010_B库口 => new MstInfo_Gateway(msg.GateWay.EC010_B库口);
 
 
     }

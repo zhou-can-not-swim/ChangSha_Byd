@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[9.0.303, )"
             },
+            "FutureTech.Dal": {
+              "target": "Package",
+              "version": "[3.1.11, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[13.0.0, )"
@@ -61,6 +65,14 @@
             "Microsoft.AspNetCore.SignalR.Core": {
               "target": "Package",
               "version": "[1.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer.HierarchyId": {
+              "target": "Package",
+              "version": "[8.0.18, )"
+            },
+            "Microsoft.Extensions.Logging.Log4Net.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             },
             "Sharp7": {
               "target": "Package",

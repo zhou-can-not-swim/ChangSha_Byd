@@ -121,8 +121,8 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Plc
         /// <summary>
         /// 每一次访问库口，都会实例化
         /// </summary>
-        public PlcInfo_Gateway EC010_A库口 => new PlcInfo_Gateway(ref msg.EC010_A库口);
-        public PlcInfo_Gateway EC010_B库口 => new PlcInfo_Gateway(ref msg.EC010_B库口);
+        public PlcInfo_Gateway EC010_A库口 => new PlcInfo_Gateway(msg.EC010_A库口);
+        public PlcInfo_Gateway EC010_B库口 => new PlcInfo_Gateway(msg.EC010_B库口);
 
 
 

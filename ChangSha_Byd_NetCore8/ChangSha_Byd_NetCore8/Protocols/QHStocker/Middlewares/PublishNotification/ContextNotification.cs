@@ -4,7 +4,7 @@ using MediatR;
 namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares.PublishNotification
 {
     /// <summary>
-    /// 与plc连接时的准备
+    /// 与plc连接时的准备，在publishNotificationMiddleware中设置好了值，可以在这里面处理后交给handler处理
     /// </summary>
     public class ScanContextNotification : INotification
     {

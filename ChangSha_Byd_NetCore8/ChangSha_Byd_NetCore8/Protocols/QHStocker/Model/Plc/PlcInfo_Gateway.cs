@@ -5,17 +5,17 @@
     /// </summary>
     public class PlcInfo_Gateway
     {
-        private readonly PlcMsg_Gateway _msg;
+        private readonly PlcMsg_Gateway _plcMsg_Gateway;
 
-        public PlcInfo_Gateway(ref PlcMsg_Gateway msg)
+        public PlcInfo_Gateway(PlcMsg_Gateway plcMsg_Gateway)
         {
-            this._msg = msg;
+            this._plcMsg_Gateway = plcMsg_Gateway;
         }
 
 
-        public bool StandByReq => this._msg.Plc信号灯.HasFlag(PlcMsg_GatewayFlags.就位请求);
-        public bool OutStatus => this._msg.Plc信号灯.HasFlag(PlcMsg_GatewayFlags.允许出库);
-        public int RequestTaskResult => this._msg.检验结果;
-        public string EntryRFID => this._msg.入库来料RFID.ToString();
+        public bool StandByReq => this._plcMsg_Gateway.Plc信号灯.HasFlag(PlcMsg_GatewayFlags.就位请求);
+        public bool OutStatus => this._plcMsg_Gateway.Plc信号灯.HasFlag(PlcMsg_GatewayFlags.允许出库);
+        public int RequestTaskResult => this._plcMsg_Gateway.检验结果;
+        public string EntryRFID => this._plcMsg_Gateway.入库来料RFID.ToString();
     }
 }
