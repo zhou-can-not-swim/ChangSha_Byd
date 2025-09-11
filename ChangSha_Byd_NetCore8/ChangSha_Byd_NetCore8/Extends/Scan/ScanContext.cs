@@ -45,7 +45,10 @@ namespace ChangSha_Byd_NetCore8.Extends.Scan
         /// 在FlushPendingMiddleware 里在Pending的值写给Plc
         /// </summary>
         [JsonIgnore]
-        public MstMsg Pending { get; }
+        public MstMsg Pending { get; set; }
+
+        [JsonIgnore]
+        public PlcMsg PeddingPlc { get; set; }
 
         [JsonIgnore]
         public IServiceProvider ServiceProvider { get; }

@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using TaskStatus = ChangSha_Byd_NetCore8.Protocols.Common.TaskStatus;
 
 namespace ChangSha_Byd_NetCore8.App.Production
@@ -301,211 +303,236 @@ namespace ChangSha_Byd_NetCore8.App.Production
         ///// </summary>
         ///// <param name="input"></param>
         ///// <returns></returns>
-        //public async Task<StockTask> AddInStockTask(
-        //    AddInStockTaskInput input, 
-        //    CarType carType, 
-        //    Area_CarType_GateWay area_CarType_GateWayEntity, 
-        //    Location locationEntity,
-        //    string fengcheType = ""
-        //)
-        //{
-        //    var currentWarehouseId = _appConfiguration.Value.WarehouseId;
-        //    using (var transaction = _dBContext.Database.BeginTransaction()) //开启事务
-        //    {
-        //        try
-        //        {
-        //            StockTask entity = new StockTask();
-        //            entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //            entity.WarehouseId = currentWarehouseId;
-        //            entity.AreaId = area_CarType_GateWayEntity.AreaId;
-        //            entity.AreaName = area_CarType_GateWayEntity.Area.Name;
-        //            entity.TaskType = TaskType.入库;
-        //            entity.IsRepair = input.IsRepair;
-        //            entity.Remark = input.Remark;
-        //            entity.TaskStatus = Protocols.Common.TaskStatus.等待执行;
-        //            entity.Priority = TaskPriority.普通;
-        //            entity.CarTypeNum = input.CarTypeNum;
-        //            entity.CarTypeId = carType.Id;
+        public async Task<StockTask> AddInStockTask(
+            AddInStockTaskInput input,
+            CarType carType,
+            Area_CarType_GateWay area_CarType_GateWayEntity,
+            Location locationEntity
+        )
+        {
+            var currentWarehouseId = _appConfiguration.Value.WarehouseId;
+            using (var transaction = _dBContext.Database.BeginTransaction()) //开启事务
+            {
+                try
+                {
+                    StockTask entity = new StockTask();
+                    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    entity.WarehouseId = currentWarehouseId;
+                    entity.AreaId = area_CarType_GateWayEntity.AreaId;
+                    entity.AreaName = area_CarType_GateWayEntity.Area.Name;
+                    entity.TaskType = TaskType.入库;
+                    entity.IsRepair = input.IsRepair;
+                    entity.Remark = input.Remark;
+                    entity.TaskStatus = Protocols.Common.TaskStatus.等待执行;
+                    entity.Priority = TaskPriority.普通;
+                    entity.CarTypeNum = input.CarTypeNum;
+                    entity.CarTypeId = carType.Id;
 
 
-        //            //抓取当字符串中数字部分
-        //            int result_shuzi = int.Parse(System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"[^0-9]+", ""));
-        //            //抓取当字符串中字符部分
-        //            string result_zifu = System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"\d", "");
+                    //抓取当字符串中数字部分
+                    int result_shuzi = int.Parse(System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"[^0-9]+", ""));
+                    //抓取当字符串中字符部分
+                    string result_zifu = System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"\d", "");
+
+                    if (currentWarehouseId == 1) //CW库  区域 车型 工位 ab面
+                    {
+
+                        var chexingnumber = input.CarTypeNum.Substring(1, 1); //第二位是车型
+
+                        //HACK 模拟的Categorya表数据,但是rfid的第1位和第二位尽量不要使用1和2，1和2车型在数据库中有
+                        Category tempCategory = null;
 
 
-        //            //if (!string.IsNullOrEmpty(result_zifu))//有字符的
-        //            //{
-        //            //    entity.CarTypeName = carType.Name;
-        //            //    entity.CarTypeInt = int.Parse(result_shuzi.ToString().Substring(0, 1));
-        //            //    if (result_shuzi >= 10000)
-        //            //    {
-        //            //        entity.CarTypeFace = 1;//主线
-        //            //    }
-        //            //    else
-        //            //    {
-        //            //        entity.CarTypeFace = 2;//UB
-        //            //    }
-        //            //}
-        //            if (currentWarehouseId == 1) //侧围轮罩库  区域 车型 工位 ab面
-        //            {
+                        if (tempCategory != null)
+                        {
+                            //有车型的情况下
+                            entity.CarTypeName = tempCategory.Name; //赋值车型名字
+                            entity.CarTypeInt = tempCategory.DtValue; //车型
+                        }
+                        else
+                        {
+                            //没有车型的情况下
+                            entity.CarTypeName = "其他车型";
+                            entity.CarTypeInt = "0"; //车型
+                        }
 
-        //                var chexingnumber = input.CarTypeNum.Substring(1, 1); //第二位是车型
-        //                var tempCategory = await _osContext.Categories.Where(a => !a.IsDeleted && a.TypeId == "CarType" && a.DtValue == chexingnumber).AsNoTracking()
-        //                    .FirstOrDefaultAsync();
+                        if (input.CarTypeNum.Substring(3, 1) == "1")
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_A面";
+                            entity.CarTypeFace = 1;
+                        }
+                        else
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_B面";
+                            entity.CarTypeFace = 2;
+                        }
 
-        //                if (tempCategory != null)
-        //                {
-        //                    //有车型的情况下
-        //                    entity.CarTypeName = tempCategory.Name; //赋值车型名字
-        //                    entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                }
-        //                else
-        //                {
-        //                    //没有车型的情况下
-        //                    entity.CarTypeName = "其他车型";
-        //                    entity.CarTypeInt = "0"; //车型
-        //                }
+                        //entity.CarTypeInt = tempCategory.DtValue; //车型
+                        entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
+                    }
+                    else //QH库
+                    {
 
-        //                if (input.CarTypeNum.Substring(3, 1) == "1")
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_A面";
-        //                    entity.CarTypeFace = 1;
-        //                }
-        //                else
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_B面";
-        //                    entity.CarTypeFace = 2;
-        //                }
+                        var chexingnumber = input.CarTypeNum.Substring(1, 1); //rfid第二位是车型,在原来的数据库中只有1和2
+                        //TODO 可以通过query的方式直接获取车型，还没做（好像做不了，可以换一种思路）
+                        Category tempCategory = null;
+                        if (tempCategory != null)
+                        {
+                            //有车型的情况下
+                            entity.CarTypeName = tempCategory.Name; //赋值车型名字
+                            entity.CarTypeInt = tempCategory.DtValue; //车型
+                        }
+                        else
+                        {
+                            //没有车型的情况下
+                            entity.CarTypeName = "其他车型";
+                            entity.CarTypeInt = "0"; //车型
+                        }
 
-        //                //entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
+                        //从索引3开始取长度为1的字符 -->取第4个字符是不是1
+                        if (input.CarTypeNum.Substring(3, 1) == "1")
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_A面";
+                            entity.CarTypeFace = 1;
+                        }
+                        else
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_B面";
+                            entity.CarTypeFace = 2;
+                        }
 
+                        //entity.CarTypeInt = tempCategory.DtValue; //车型
+                        entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
+                    }
 
+                    entity.CreateTime = DateTime.Now;
 
+                    entity.GatewayId = area_CarType_GateWayEntity.InGatewayId;
+                    entity.GatewayName = area_CarType_GateWayEntity.InGateway.Name;
+                    entity.SetTaskType = 0;
 
+                    entity.EquipmentId = locationEntity.EquipmentId;
+                    entity.EquipmentName = locationEntity.Equipment.Name;
+                    entity.TaskNo = await _tempCodeApp.GetNewCode();
+                    ////取库位(新加的)
+                    entity.OutLocationId = area_CarType_GateWayEntity.InGatewayId;
+                    entity.OutLocationCode = area_CarType_GateWayEntity.InGateway.LocationCode;
+                    //放库位
+                    entity.InLocationId = locationEntity.Id;
+                    entity.InLocationCode = locationEntity.Code;
+                    entity.LocationType = locationEntity.LocationType;
 
-        //                //var rdidQ = input.CarTypeNum.Substring(0, 2);
-        //                //var rfidT = input.CarTypeNum.Substring(1, 1);
-        //                //var rfidLast = input.CarTypeNum.Substring(2, input.CarTypeNum.Length - 2);
+                    var res = await Repository.AddAsync(entity, false);
 
-        //                ////十六进制转十进制
-        //                //var rfidNumcode = Convert.ToInt32(rfidLast, 16);
+                    //修改库位状态
+                    locationEntity.LocationStatus = LocationStatus.锁定;
+                    locationEntity.Area = null;
+                    locationEntity.Equipment = null;
+                    locationEntity.Warehouse = null;
+                    await _locationApp.UpdateForTrackedAsync(locationEntity, false);
 
-        //                //var isrdidZifu = System.Text.RegularExpressions.Regex.Replace(rdidQ, @"\d", "");
-        //                //if (!string.IsNullOrEmpty(isrdidZifu))
-        //                //{
-        //                //    //MB
-        //                //    //判断是四线还是三线主线库
-        //                //    if (lineId == 4)
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AEC4" + rfidT + rfidNumcode.ToString().PadLeft(3, '0');
-        //                //    }
-        //                //    else
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AEC3" + rfidT + rfidNumcode.ToString().PadLeft(3, '0');
-        //                //    }
+                    await Repository.SaveChangesAsync();
+                    transaction.Commit();       //提交事务
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    string a = ex.Message;
+                    transaction.Rollback();     //回滚事务
+                    return null;
+                }
+            }
+        }
 
-        //                //    entity.CarTypeFace = 1; //MB线体区域(此字段当作视图中线体区域部分,只有主线库有特殊区别)
-
-        //                //}
-        //                //else
-        //                //{
-        //                //    //UB
-        //                //    //判断是四线还是三线主线库
-        //                //    if (lineId==4)
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AECU4" + rfidT + rfidNumcode.ToString().PadLeft(2, '0');
-        //                //    }
-        //                //    else
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AECU3" + rfidT + rfidNumcode.ToString().PadLeft(2, '0');
-        //                //    }
-
-        //                //    entity.CarTypeFace = 2; //UB线体区域(此字段当作视图中线体区域部分,只有主线库有特殊区别)
-
-        //                //}
-
-        //                //entity.CarTypeName = carType.Name;
-        //                ////UB区域
-        //                //entity.CarTypeInt = fengcheType;
-        //            }
-        //            else //其他库
-        //            {
-        //                //其他夹具库为了区别3,4,5线八种夹具名字
-        //                var chexingnumber = input.CarTypeNum.Substring(1, 1); //第二位是车型
-        //                var tempCategory = await _osContext.Categories.Where(a => !a.IsDeleted && a.TypeId == "CarType" && a.DtValue == chexingnumber).AsNoTracking()
-        //                    .FirstOrDefaultAsync();
-
-        //                if (tempCategory != null)
-        //                {
-        //                    //有车型的情况下
-        //                    entity.CarTypeName = tempCategory.Name; //赋值车型名字
-        //                    entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                }
-        //                else
-        //                {
-        //                    //没有车型的情况下
-        //                    entity.CarTypeName = "其他车型";
-        //                    entity.CarTypeInt = "0"; //车型
-        //                }
-
-        //                //从索引3开始取长度为1的字符 -->取第4个字符是不是1
-        //                if (input.CarTypeNum.Substring(3, 1) == "1")
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_A面";
-        //                    entity.CarTypeFace = 1;
-        //                }
-        //                else
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_B面";
-        //                    entity.CarTypeFace = 2;
-        //                }
-
-        //                //entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
-        //            }
-
-        //            entity.CreateTime = DateTime.Now;
-
-        //            entity.GatewayId = area_CarType_GateWayEntity.InGatewayId;
-        //            entity.GatewayName = area_CarType_GateWayEntity.InGateway.Name;
-        //            entity.SetTaskType = 0;
-
-        //            entity.EquipmentId = locationEntity.EquipmentId;
-        //            entity.EquipmentName = locationEntity.Equipment.Name;
-        //            entity.TaskNo = await _tempCodeApp.GetNewCode();
-        //            //取库位(新加的)
-        //            entity.OutLocationId = area_CarType_GateWayEntity.InGatewayId;
-        //            entity.OutLocationCode = area_CarType_GateWayEntity.InGateway.LocationCode;
-        //            //放库位
-        //            entity.InLocationId = locationEntity.Id;
-        //            entity.InLocationCode = locationEntity.Code;
-        //            entity.LocationType = locationEntity.LocationType;
-
-        //            var res = await Repository.AddAsync(entity, false);
-
-        //            //修改库位状态
-        //            locationEntity.LocationStatus = LocationStatus.锁定;
-        //            locationEntity.Area = null;
-        //            locationEntity.Equipment = null;
-        //            locationEntity.Warehouse = null;
-        //            await _locationApp.UpdateForTrackedAsync(locationEntity, false);
-
-        //            await Repository.SaveChangesAsync();
-        //            transaction.Commit();       //提交事务
-        //            return res;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            string a = ex.Message;
-        //            transaction.Rollback();     //回滚事务
-        //            return null;
-        //        }
-        //    }
-        //}
-
-
+        #region Category表
+        public partial class Category
+        {
+            public Category()
+            {
+                this.Name = string.Empty;
+                this.DtCode = string.Empty;
+                this.DtValue = string.Empty;
+                this.SortNo = 0;
+                this.Description = string.Empty;
+                this.TypeId = string.Empty;
+                this.CreateTime = DateTime.Now;
+                this.CreateUserId = string.Empty;
+                this.CreateUserName = string.Empty;
+                this.UpdateTime = DateTime.Now;
+                this.UpdateUserId = string.Empty;
+                this.UpdateUserName = string.Empty;
+                this.IsDeleted = false;
+            }
+            public bool IsDeleted { get; set; }
+            /// <summary>
+            /// 名称
+            /// </summary>
+            [Description("名称")]
+            public string Name { get; set; }
+            /// <summary>
+            /// 代码
+            /// </summary>
+            [Description("代码")]
+            public string DtCode { get; set; }
+            /// <summary>
+            /// 通常与字典代码标识一致，但万一有不一样的情况呢？
+            /// </summary>
+            [Description("值")]
+            public string DtValue { get; set; }
+            /// <summary>
+            /// 是否可用
+            /// </summary>
+            [Description("是否可用")]
+            public bool Enable { get; set; }
+            /// <summary>
+            /// 排序号
+            /// </summary>
+            [Description("排序号")]
+            public int SortNo { get; set; }
+            /// <summary>
+            /// 描述
+            /// </summary>
+            [Description("描述")]
+            public string Description { get; set; }
+            /// <summary>
+            /// 分类ID
+            /// </summary>
+            [Description("分类标识")]
+            public string TypeId { get; set; }
+            /// <summary>
+            /// 创建时间
+            /// </summary>
+            [Description("创建时间")]
+            public System.DateTime CreateTime { get; set; }
+            /// <summary>
+            /// 创建人ID
+            /// </summary>
+            [Description("创建人ID")]
+            [Browsable(false)]
+            public string CreateUserId { get; set; }
+            /// <summary>
+            /// 创建人
+            /// </summary>
+            [Description("创建人")]
+            public string CreateUserName { get; set; }
+            /// <summary>
+            /// 最后更新时间
+            /// </summary>
+            [Description("最后更新时间")]
+            public System.DateTime? UpdateTime { get; set; }
+            /// <summary>
+            /// 最后更新人ID
+            /// </summary>
+            [Description("最后更新人ID")]
+            [Browsable(false)]
+            public string UpdateUserId { get; set; }
+            /// <summary>
+            /// 最后更新人
+            /// </summary>
+            [Description("最后更新人")]
+            public string UpdateUserName { get; set; }
+        }
+        #endregion
         /// <summary>
         /// 任务是否已存在
         /// </summary>
@@ -542,17 +569,17 @@ namespace ChangSha_Byd_NetCore8.App.Production
                     var i = await _inventoryApp.GetInventoryEntity(input);
                     if (i != null)
                     {
-                        result.Result = false;
+                        result.Result = true;
                         result.Message = "该台车已在立库!";
                     }
                     else
                     {
-                        result.Result = true;
+                        result.Result = false;
                     }
                 }
                 else
                 {
-                    result.Result = true;
+                    result.Result = false;
                 }
             }
             return result;

@@ -75,7 +75,8 @@ namespace ChangSha_Byd_NetCore8.App.WarehouseModel
             }
 
             //返回符合carTypeId的所有记录
-            return await Repository.Query(query.AddInclude(a => a.Area).AddInclude(a => a.InGateway).AddInclude(a => a.OutGateway)).AsNoTracking().ToListAsync();
+            return await Repository.Query(query.AddInclude(a => a.Area).AddInclude(a => a.InGateway).AddInclude(a => a.OutGateway))
+                .AsNoTracking().ToListAsync();
         }
 
         //区域 车型 库口  --> 一个entity

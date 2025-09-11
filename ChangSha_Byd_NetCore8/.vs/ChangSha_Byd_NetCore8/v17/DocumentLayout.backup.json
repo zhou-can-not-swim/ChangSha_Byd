@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\production\\stocktaskapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\production\\stocktaskapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\addappservicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\addappservicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\handler\\plcinstockarrivedmessagehander.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\handler\\plcinstockarrivedmessagehander.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\protocols\\qhstocker\\middlewares\\entryarrivedmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\protocols\\qhstocker\\middlewares\\entryarrivedmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\protocols\\qhstocker\\middlewares\\sendtaskmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\protocols\\qhstocker\\middlewares\\sendtaskmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\warehousemodel\\locationapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\warehousemodel\\locationapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,54 +46,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AddAppServiceCollectionExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\AddAppServiceCollectionExtensions.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\AddAppServiceCollectionExtensions.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\AddAppServiceCollectionExtensions.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\AddAppServiceCollectionExtensions.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAQwBUAAAArAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "StockTaskApp.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
+              "ViewState": "AgIAAI4BAAAAAAAAAAAxwKIBAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T08:29:05.263Z",
+              "WhenOpened": "2025-09-11T08:40:38.801Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Program.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Program.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Program.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Program.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADkAAAApAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "PlcInStockArrivedMessageHander.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Handler\\PlcInStockArrivedMessageHander.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Handler\\PlcInStockArrivedMessageHander.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Handler\\PlcInStockArrivedMessageHander.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Handler\\PlcInStockArrivedMessageHander.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAIwHgAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T08:19:25.638Z",
+              "WhenOpened": "2025-09-11T08:31:31.337Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EntryArrivedMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\EntryArrivedMiddleware.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\EntryArrivedMiddleware.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\EntryArrivedMiddleware.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\EntryArrivedMiddleware.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "LocationApp.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
+              "ViewState": "AgIAACgBAAAAAAAAAAD4vzIBAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T08:18:24.376Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SendTaskMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\SendTaskMiddleware.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\SendTaskMiddleware.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\SendTaskMiddleware.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\SendTaskMiddleware.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAG8AAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T08:10:09.783Z",
+              "WhenOpened": "2025-09-11T06:49:34.455Z",
               "EditorCaption": ""
             }
           ]

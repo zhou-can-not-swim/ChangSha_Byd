@@ -34,7 +34,7 @@ namespace ChangSha_Byd_NetCore8.Handler
             if (entityc == null)//说明当前没有 已校验  出库任务？？？
             {
                 QH_OutLocation outLocation = request.outLocation;
-                //这是什么写法？？？
+                //TODO 这是什么写法？？？
                 var OutGateWayIds = typeof(QH_OutLocation).GetFields()
                 .Select(a =>
                 {

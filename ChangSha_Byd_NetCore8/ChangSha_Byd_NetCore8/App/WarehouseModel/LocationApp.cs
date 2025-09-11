@@ -281,30 +281,22 @@ namespace ChangSha_Byd_NetCore8.App.WarehouseModel
             }
             else//只有两个，一个cw，一个QH
             {
+                //TODO: 待完善
                 //其他夹具库
                 var query = new Specification<Location>(
-                    a => !a.IsDeleted &&
-                    a.LocationStatus == LocationStatus.未使用 &&
-                    a.IsDisabled == false &&
-                    a.LocationType != LocationType.库口      //不能是库口（含AB面的吗？？？）
+                    a => !a.IsDeleted &&                        //都是0，都没有删除，不用看了
+                    a.LocationStatus == LocationStatus.未使用 &&   //要求LocationStatus=0
+                    a.IsDisabled == false &&                        //要求IsDisabled=0
+                    a.LocationType != LocationType.库口      //不能是库口 也就是!=2
                 );
                 query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
                 //因为分拼库夹具超高,只能放到大库位------>对应的好像是QH
-                if (area_CarType_GateWayEntity.InGateway.Remark == "超高夹具")
+                if (area_CarType_GateWayEntity.InGateway.Remark == "超高夹具")//没用到
                 {
-                    //var queryChaoGao = new Specification<Location>(a => !a.IsDeleted && a.LocationStatus == LocationStatus.未使用 && a.IsDisabled == false && a.LocationType != LocationType.库口);
-                    //queryChaoGao.CombineCritia(t => t.WarehouseId == currentWarehouseId);
-                    //query.CombineCritia(t => t.AreaId == (area_CarType_GateWayEntity.AreaId + 1));//放到大库位区域中
-                    //一排31列之后是大库位
-                    query.CombineCritia(t => t.LineNo==1 && t.ColumnNo>=31);//查询第一排的大库位区域从31列开始属于大库位
-                    resLocaiton = await Repository.Query(query)
-                        .Include(a => a.Equipment)
-                        .OrderBy(a => a.ColumnNo)
-                        .ThenBy(a => a.FloorNo)
-                        .AsNoTracking().FirstOrDefaultAsync();
                 }
-                else
+                else//直接进else
                 {
+                    //TODO：有问题
                     query.CombineCritia(u => u.AreaId == area_CarType_GateWayEntity.AreaId);
 
                     //根据库口的列值开始从小到大。如果没有获取比库口小的列值
@@ -312,9 +304,14 @@ namespace ChangSha_Byd_NetCore8.App.WarehouseModel
                     var res = InGateWayCode.Split('-')[1];//获取列数
                     int inGateWayColumn = int.Parse(res);
                     //原程序
-                    query.CombineCritia(u => u.ColumnNo >= inGateWayColumn);
-                    //原程序
-                    resLocaiton = await Repository.Query(query).Include(a => a.Equipment).OrderBy(a => a.ColumnNo).ThenBy(a => a.FloorNo).AsNoTracking().FirstOrDefaultAsync();
+                    if (inGateWayColumn != 0)
+                    {
+                        query.CombineCritia(u => u.ColumnNo >= inGateWayColumn);
+                    }
+                    //按照列和层进行排序
+                    resLocaiton = await this.Repository.Query(query).Include(a => a.Equipment).OrderBy(a => a.ColumnNo).ThenBy(a => a.FloorNo).AsNoTracking().FirstOrDefaultAsync();
+
+
                     if (resLocaiton == null)
                     {
                         var query2 = new Specification<Location>(a => !a.IsDeleted && a.LocationStatus == LocationStatus.未使用 && a.IsDisabled == false && a.LocationType != LocationType.库口);

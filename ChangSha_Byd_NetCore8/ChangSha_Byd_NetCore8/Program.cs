@@ -3,8 +3,10 @@ using ChangSha_Byd_NetCore8.App;
 using ChangSha_Byd_NetCore8.AsZero;
 using ChangSha_Byd_NetCore8.Handler;
 using ChangSha_Byd_NetCore8.Hub;
+using ChangSha_Byd_NetCore8.OpenAuth.Infra;
 using ChangSha_Byd_NetCore8.Protocols;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -52,7 +54,7 @@ builder.Services.AddScanOpts(builder.Configuration.GetSection("ScanOpts"));//Ìí¼
 
 #region infra
 
-builder.Services.AddLogging(logging => { logging.AddLog4Net(); });//ÏÂÔØlog4net°ü£¬Ò»¶¨ÒªÓĞlog4net.configÎÄ¼ş
+//builder.Services.AddLogging(logging => { logging.AddLog4Net(); });//ÏÂÔØlog4net°ü£¬Ò»¶¨ÒªÓĞlog4net.configÎÄ¼ş
 
 builder.Services.AddDbContext<AsZeroDbContext>(opts =>
 {
@@ -66,6 +68,7 @@ builder.Services.AddDbContext<AsZeroDbContext>(opts =>
 });
 
 
+builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSetting"));
 builder.Services.AddAsZeroRepositories();
 //builder.Services.AddAsZeroHostedServices();  //ºÃÏñÃ»É¶ÓÃ
 builder.Services.AddApps();

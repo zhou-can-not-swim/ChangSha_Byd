@@ -33,7 +33,408 @@
           }
         }
       }
+    },
+    "/api/db/all": {
+      "get": {
+        "tags": [
+          "ZBotu"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlcMsg"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlcMsg"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlcMsg"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/db": {
+      "post": {
+        "tags": [
+          "ZBotu"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanContext"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanContext"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanContext"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanContext"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanContext"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanContext"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
-  "components": { }
+  "components": {
+    "schemas": {
+      "MstInfo": {
+        "type": "object",
+        "properties": {
+          "heartBeatReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "heartBeatAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "sendTaskReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "finishTaskAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requsetTaskReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requsetTaskResultAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requsetOutTaskReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "taskNo": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "taskType": {
+            "$ref": "#/components/schemas/PLCTaskType"
+          },
+          "startLine": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "startFloor": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "startColumn": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "endLine": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "endFloor": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "endColumn": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "verificationCode": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "taskRFID": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "eC010_A库口": {
+            "$ref": "#/components/schemas/MstInfo_Gateway"
+          },
+          "eC010_B库口": {
+            "$ref": "#/components/schemas/MstInfo_Gateway"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MstInfo_Gateway": {
+        "type": "object",
+        "properties": {
+          "standByAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requestTaskRFID": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MstMsg": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PLCTaskType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PlcInfo": {
+        "type": "object",
+        "properties": {
+          "heartBeatAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "heartBeatReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "sendTaskAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "finishTaskReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requestTaskAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requestTaskResultReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requestOutTaskAck": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "storkerStatus": {
+            "$ref": "#/components/schemas/StockerStatus"
+          },
+          "stockerTrip": {
+            "$ref": "#/components/schemas/StockerTrip"
+          },
+          "stockerCargo": {
+            "$ref": "#/components/schemas/StockerCargo"
+          },
+          "stockerAction": {
+            "$ref": "#/components/schemas/StockerAction"
+          },
+          "currentFloor": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "currentLine": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "currentColumn": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "doTaskNo": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "taskNo": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "verificationCode": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "errorCode1": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errorCode2": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errorCode3": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errorCode4": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "errorCode5": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "eC010_A库口": {
+            "$ref": "#/components/schemas/PlcInfo_Gateway"
+          },
+          "eC010_B库口": {
+            "$ref": "#/components/schemas/PlcInfo_Gateway"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlcInfo_Gateway": {
+        "type": "object",
+        "properties": {
+          "standByReq": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "outStatus": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "requestTaskResult": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "entryRFID": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlcMsg": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ScanContext": {
+        "type": "object",
+        "properties": {
+          "plcInfo": {
+            "$ref": "#/components/schemas/PlcInfo"
+          },
+          "mstInfo": {
+            "$ref": "#/components/schemas/MstInfo"
+          },
+          "mstMsg": {
+            "$ref": "#/components/schemas/MstMsg"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockerAction": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "StockerCargo": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "StockerStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "StockerTrip": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
 }

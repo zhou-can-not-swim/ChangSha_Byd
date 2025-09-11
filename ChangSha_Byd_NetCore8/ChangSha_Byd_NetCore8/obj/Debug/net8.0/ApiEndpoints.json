@@ -1,5 +1,51 @@
 [
   {
+    "ContainingType": "ChangSha_Byd_NetCore8.Controllers.ZBotuController",
+    "Method": "ChangeAsync",
+    "RelativePath": "api/db",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "conetxt",
+        "Type": "ChangSha_Byd_NetCore8.Extends.Scan.ScanContext",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ChangSha_Byd_NetCore8.Extends.Scan.ScanContext",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChangSha_Byd_NetCore8.Controllers.ZBotuController",
+    "Method": "Load",
+    "RelativePath": "api/db/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Plc.PlcMsg",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "ChangSha_Byd_NetCore8.Controllers.TestHomeController",
     "Method": "Load",
     "RelativePath": "api/test",

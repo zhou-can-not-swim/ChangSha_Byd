@@ -23,6 +23,7 @@
     <Folder Include="App\Request\" />
     <Folder Include="Extends\PlcServices\QHServices\" />
     <Folder Include="Protocols\CWStocker\" />
+    <Folder Include="Controller\" />
   </ItemGroup>
 
 </Project>
