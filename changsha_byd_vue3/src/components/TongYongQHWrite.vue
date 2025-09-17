@@ -8,7 +8,7 @@
             <p>plc心跳请求<input v-model="context_plc.heartBeatReq" type="checkbox" :true-value="true"
                     :false-value="false">{{ context_plc.heartBeatReq }}</p>
 
-            <p>mst心跳请求<input v-model="context_mst.heartBeatAck" type="checkbox" :true-value="true"
+            <p>mst心跳响应<input v-model="context_mst.heartBeatAck" type="checkbox" :true-value="true"
                     :false-value="false">{{ context_mst.heartBeatAck }}</p>
             <p>mst心跳请求<input v-model="context_mst.heartBeatReq" type="checkbox" :true-value="true"
                     :false-value="false">{{ context_mst.heartBeatReq }}</p>
@@ -30,8 +30,8 @@
 </template>
 
 <script setup>
+import service from "@/utils/http";
 import axios from "axios";
-import * as signalrs from '@/utils/signalr'
 import { watch, onMounted, onUnmounted, reactive, ref } from "vue";
 // const context_temp = ref({})
 const context_mst = ref({
@@ -99,12 +99,18 @@ const context_plc = ref({
     heartBeatReq: false
 })
 // Watcher
-watch([context_mst.value,context_plc.value], ([newm, newp], [oldm, oldp]) => {
-    axios.post('/api/db', newm.value,newm.value).then(res => {
-        console.log('Response from server:', res.data);
-    })
-}, { deep: true })
+// watch([context_mst.value,context_plc.value], ([newm, newp], [oldm, oldp]) => {
+//     service.post('/api/db', newm.value,newm.value).then(res => {
+//         console.log('Response from server:', res.data);
+//     })
+// }, { deep: true })
 
+
+watch([context_plc, context_mst],
+  ([newPlc, newMst]) => {
+    service.post('/api/db', { plc: newPlc, mst: newMst })
+           .then(res => console.log('saved', res.data));
+  }, { deep: true });
 // Lifecycle hooks
 // onMounted(() => {
 //     signalrs.startNewConnection('duiduoji')

@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from '@/utils/http'
 export function getPageList(params) {
   return request({
     url: '/wms/stockTask/Load',
