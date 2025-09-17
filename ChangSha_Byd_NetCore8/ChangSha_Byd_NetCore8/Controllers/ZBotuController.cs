@@ -1,4 +1,5 @@
-﻿using ChangSha_Byd_NetCore8.Extends;
+﻿using ChangSha_Byd_NetCore8.Controllers.Dto;
+using ChangSha_Byd_NetCore8.Extends;
 using ChangSha_Byd_NetCore8.Extends.Scan;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Plc;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using System.Runtime.InteropServices;
 
 namespace ChangSha_Byd_NetCore8.Controllers
 {
@@ -50,13 +50,28 @@ namespace ChangSha_Byd_NetCore8.Controllers
             return plcmsg;
         }
 
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<Object> ChangeAsync([FromBody]Object conetxt)
+        //{
+        //    return conetxt;
+        //    //var v = _cache.Set<ScanContext>("conetxt", conetxt);
+        //    //return conetxt;
+        //}
+
+        // POST /api/db
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ScanContext> ChangeAsync([FromBody]ScanContext conetxt)
+        public IActionResult PostAll([FromBody]MstDto dto)
         {
-            var v = _cache.Set<ScanContext>("conetxt", conetxt);
-            return conetxt;
+
+            Console.WriteLine(dto.SendTaskReq);
+            Console.WriteLine(dto.FinishTaskAck);
+
+
+            return Ok();
         }
+
 
 
 

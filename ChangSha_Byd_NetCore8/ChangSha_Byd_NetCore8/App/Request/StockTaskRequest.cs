@@ -26,14 +26,14 @@ namespace Byd.Services.Request
     }
     public class GetStockTaskListInput
     {
-        public string key { get; set; }
+        public string? key { get; set; }
         public int? WarehouseId { get; set; }
         public int? AreaId { get; set; }
         public int? TrayId { get; set; }
         public int? Type { get; set; }
         public int? Status { get; set; }
 
-        public string ProductId { get; set; }
+        public string? ProductId { get; set; }
 
         public int? NotStatus { get; set; }
         public int? EquipmentId { get; set; }

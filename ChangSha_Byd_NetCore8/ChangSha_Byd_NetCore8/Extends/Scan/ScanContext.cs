@@ -1,6 +1,7 @@
 ﻿using ChangSha_Byd_NetCore8.fan.middlewares;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Mst;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Plc;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.SnapShot;
 using System.Text.Json.Serialization;
 
 namespace ChangSha_Byd_NetCore8.Extends.Scan
@@ -45,7 +46,7 @@ namespace ChangSha_Byd_NetCore8.Extends.Scan
         /// 在FlushPendingMiddleware 里在Pending的值写给Plc
         /// </summary>
         [JsonIgnore]
-        public MstMsg Pending { get; set; }
+        public MstMsg Pending { get; }
 
         [JsonIgnore]
         public PlcMsg PeddingPlc { get; set; }
@@ -54,5 +55,8 @@ namespace ChangSha_Byd_NetCore8.Extends.Scan
         public IServiceProvider ServiceProvider { get; }
 
         public DateTime CreatedAt { get; }
+
+
+
     }
 }

@@ -9,6 +9,8 @@ using FutureTech.Dal.Repository;
 using FutureTech.Dal.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.ComponentModel;
+using System.Dynamic;
 
 namespace ChangSha_Byd_NetCore8.App.Production
 {
@@ -263,66 +265,178 @@ namespace ChangSha_Byd_NetCore8.App.Production
 
 
         }
-       
-        //TODO 获取库存列表
+
+        // 获取库存列表
         //这个carTypeList需要用到apenAuth,但是我感觉可以省略掉这一步直接获取
-        //public async Task<List<GetInventoryReportOutput>> GetInventoryReport()
-        //{
-        //    List<GetInventoryReportOutput> result = new List<GetInventoryReportOutput>();
-        //    var currentWarehouseId = _appConfiguration.Value.WarehouseId;
+        public async Task<List<GetInventoryReportOutput>> GetInventoryReport()
+        {
+            List<GetInventoryReportOutput> result = new List<GetInventoryReportOutput>();
+            var currentWarehouseId = _appConfiguration.Value.WarehouseId;
 
-        //    var query = _dBContext.Inventorys.Where(u => !u.IsDeleted && u.WarehouseId == currentWarehouseId);
+            var query = _dBContext.Inventorys.Where(u => !u.IsDeleted && u.WarehouseId == currentWarehouseId);
 
-        //    if (currentWarehouseId == 1)//主线ub库
-        //    {
-        //        result = await query
-        //            .GroupBy(a => a.CarTypeName)
-        //           .Select(a => new GetInventoryReportOutput()
-        //           {
-        //               CarTypeName = a.Key,
-        //                //CarTypeName = a.Select(n => n.CarTypeName).FirstOrDefault()??"",
-        //                Count = a.Count()
-        //           }).ToListAsync();
-        //    }
-        //    else
-        //    {
+            if (currentWarehouseId == 1)//主线ub库
+            {
+                result = await query
+                    .GroupBy(a => a.CarTypeName)
+                   .Select(a => new GetInventoryReportOutput()
+                   {
+                       CarTypeName = a.Key,
+                       //CarTypeName = a.Select(n => n.CarTypeName).FirstOrDefault()??"",
+                       Count = a.Count()
+                   }).ToListAsync();
+            }
+            else
+            {
 
-        //        var carTypeList = await _openAuthDBContext.Categories.Where(a => !a.IsDeleted && a.TypeId == "CarType").AsNoTracking().ToListAsync();
+                //var carTypeList = await _openAuthDBContext.Categories.Where(a => !a.IsDeleted && a.TypeId == "CarType").AsNoTracking().ToListAsync();
+
+                var carTypeList = new List<Category>
+                {
+                    new Category
+                    {
+                        Id = "b8611edd-ecee-4b51-928b-9df0bfe5be82",
+                        Name = "EKEA",
+                        DtCode = "",
+                        DtValue = "2",
+                        Enable = false,
+                        SortNo = 0,
+                        Description = "",
+                        TypeId = "CarType",
+                        CreateTime = DateTime.Parse("2022-08-17 10:06:09.5466610"),
+                        CreateUserId = "49df1602-f5f3-4d52-afb7-3802da619558",
+                        CreateUserName = "管理员",
+                        UpdateTime = DateTime.Parse("2022-08-17 10:06:09.5466554"),
+                        UpdateUserId = null,
+                        UpdateUserName = null,
+                        IsDeleted = false
+                    },
+                    new Category
+                    {
+                        Id = "c33ad4b8-301f-4e74-a6e2-a8c3075ad6cf",
+                        Name = "SC2E",
+                        DtCode = "",
+                        DtValue = "1",
+                        Enable = false,
+                        SortNo = 0,
+                        Description = "",
+                        TypeId = "CarType",
+                        CreateTime = DateTime.Parse("2022-08-17 10:05:45.4187092"),
+                        CreateUserId = "49df1602-f5f3-4d52-afb7-3802da619558",
+                        CreateUserName = "管理员",
+                        UpdateTime = DateTime.Parse("2022-08-17 10:05:45.4172853"),
+                        UpdateUserId = null,
+                        UpdateUserName = null,
+                        IsDeleted = false
+                    }
+                };
 
 
-        //        var a = from s in query
-        //                group s by s.CarTypeInt into temp
-        //                select new { CarTypeInt = temp.Key, Count = temp.Count() }
-        //                 ;
+                var a = from s in query
+                        group s by s.CarTypeInt into temp
+                        select new { CarTypeInt = temp.Key, Count = temp.Count() };
 
-        //        var list = await a.AsNoTracking().ToListAsync();
-        //        foreach (var i in list)
-        //        {
-        //            GetInventoryReportOutput output = new GetInventoryReportOutput()
-        //            {
-        //                CarTypeName = carTypeList.Where(d => d.DtValue == i.CarTypeInt.ToString()).Select(d => d.Name).FirstOrDefault(),
-        //                Count = i.Count
-        //            };
-        //            result.Add(output);
-        //        }
-
-
-        //        //result = await query
-        //        //    .GroupBy(a => a.CarTypeName)
-        //        //   .Select(a => new GetInventoryReportOutput()
-        //        //   {
-        //        //       CarTypeName = a.Key,
-        //        //        //CarTypeName = a.Select(n => n.CarTypeName).FirstOrDefault()??"",
-        //        //        Count = a.Count()
-        //        //   }).ToListAsync();
+                var list = await a.AsNoTracking().ToListAsync();
+                foreach (var i in list)
+                {
+                    GetInventoryReportOutput output = new GetInventoryReportOutput()
+                    {
+                        CarTypeName = carTypeList.Where(d => d.DtValue == i.CarTypeInt.ToString()).Select(d => d.Name).FirstOrDefault(),
+                        Count = i.Count
+                    };
+                    result.Add(output);
+                }
 
 
+                //result = await query
+                //    .GroupBy(a => a.CarTypeName)
+                //   .Select(a => new GetInventoryReportOutput()
+                //   {
+                //       CarTypeName = a.Key,
+                //        //CarTypeName = a.Select(n => n.CarTypeName).FirstOrDefault()??"",
+                //        Count = a.Count()
+                //   }).ToListAsync();
 
-        //    }
-
-        //    return result;
-        //}
 
 
+            }
+
+            return result;
+        }
+
+        public class Category
+        {
+
+            public string Id { get; set; }
+
+            public bool IsDeleted { get; set; }
+            /// <summary>
+            /// 名称
+            /// </summary>
+            [Description("名称")]
+            public string Name { get; set; }
+            /// <summary>
+            /// 代码
+            /// </summary>
+            [Description("代码")]
+            public string DtCode { get; set; }
+            /// <summary>
+            /// 通常与字典代码标识一致，但万一有不一样的情况呢？
+            /// </summary>
+            [Description("值")]
+            public string DtValue { get; set; }
+            /// <summary>
+            /// 是否可用
+            /// </summary>
+            [Description("是否可用")]
+            public bool Enable { get; set; }
+            /// <summary>
+            /// 排序号
+            /// </summary>
+            [Description("排序号")]
+            public int SortNo { get; set; }
+            /// <summary>
+            /// 描述
+            /// </summary>
+            [Description("描述")]
+            public string Description { get; set; }
+            /// <summary>
+            /// 分类ID
+            /// </summary>
+            [Description("分类标识")]
+            public string TypeId { get; set; }
+            /// <summary>
+            /// 创建时间
+            /// </summary>
+            [Description("创建时间")]
+            public System.DateTime CreateTime { get; set; }
+            /// <summary>
+            /// 创建人ID
+            /// </summary>
+            [Description("创建人ID")]
+            [Browsable(false)]
+            public string CreateUserId { get; set; }
+            /// <summary>
+            /// 创建人
+            /// </summary>
+            [Description("创建人")]
+            public string CreateUserName { get; set; }
+            /// <summary>
+            /// 最后更新时间
+            /// </summary>
+            [Description("最后更新时间")]
+            public System.DateTime? UpdateTime { get; set; }
+            /// <summary>
+            /// 最后更新人ID
+            /// </summary>
+            [Description("最后更新人ID")]
+            [Browsable(false)]
+            public string UpdateUserId { get; set; }
+            /// <summary>
+            /// 最后更新人
+            /// </summary>
+            [Description("最后更新人")]
+            public string UpdateUserName { get; set; }
+        }
     }
 }

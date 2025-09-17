@@ -41,14 +41,14 @@ namespace ChangSha_Byd_NetCore8.Handler
             GetStockTaskEntityInput getStockTaskEntityInput = new GetStockTaskEntityInput()
             {
                 EquipmentId = request.EquipmentId,//当前设备号（只有堆垛机）
-                Status = (int)request.TaskStatus, //状态为1 等待执行
+                Status = (int)request.TaskStatus, //状态为1 等待执行 或者是6 已校验等待执行
                 TaskType = (int?)request.TaskType,      // 可能是123 主要是为了下面去找出库还是入库还是移库任务
                 AreaId = request.AreaId,
                 IsRepair = request.IsRepair
 
             };
 
-            //TODO 有一点逻辑上的没搞懂
+
             #region  获取任务,只获取一条
             //移库任务
             if (requestTaskType == 3)
@@ -61,15 +61,15 @@ namespace ChangSha_Byd_NetCore8.Handler
             }
             else if (requestTaskType == 2 && !request.IsRepair)//获取出库任务
             {
-                //得到所有的出库口 
+                //得到所有的出库口 ，
                 foreach (var item in request.OutGateWayStatusList)
                 {
-                    if (item.OutStatus == true)
+                    if (item.OutStatus == true)//true说明当前库口处于打开状态，如果为false说明有任务占用了
                     {
                         //给GatewayId
                         getStockTaskEntityInput.GatewayId = (int)item.outLocation;
 
-                        //又获取了Task,只拿取第一个出库Task
+                        //只拿打开库口的 任务
                         stockTask = await _stockTaskApp.GetStockTaskEntity(getStockTaskEntityInput);
                         if (stockTask != null)
                         {
@@ -181,7 +181,7 @@ namespace ChangSha_Byd_NetCore8.Handler
                     Timestamp = DateTime.Now,
                 };
 
-                await _hubContext.Clients.All.showMsg(logMessage);
+                //await _hubContext.Clients.All.showMsg(logMessage);
                 //记录到日志文件
                 this._logger.LogInformation(logMessage.Content);
 

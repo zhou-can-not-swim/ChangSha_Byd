@@ -37,7 +37,6 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
                     context.Pending.Core.VerificationCode = 0;
                 }
 
-                //后面4个默认为false 取反为true,不需要判断
                 //plc设备的三种状态
                 if (context.PlcInfo.StorkerStatus == StockerStatus.联机 &&
                     context.PlcInfo.StockerTrip == StockerTrip.待机 &&
@@ -112,6 +111,10 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
 
 
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("SendTaskMiddleware异常："+e);
+            }
             finally
             {
                 await next(context);
@@ -124,7 +127,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
         {
             //找到对应的工位出口，写入对应的RFID，也就是CarTypeNum,和rfid是一个值
             if (outLocation == QH_OutLocation.EC010_A工位出口) context.Pending.GateWay.EC010_A库口.请求出库RFID = short.Parse(TaskRFID);
-            if (outLocation == QH_OutLocation.EC010_B工位出口) context.Pending.GateWay.EC010_B库口.请求出库RFID = short.Parse(TaskRFID);
+            if (outLocation == QH_OutLocation.EC010_B工位出口) context.Pending.GateWay.EC010_B库口.请求出库RFID = short.Parse(TaskRFID);//请求出库RFID 页面上的
 
             return context;
         }

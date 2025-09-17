@@ -130,7 +130,7 @@ namespace ChangSha_Byd_NetCore8.Handler
                     };
 
                     //在前端展现出来
-                    await _hubContext.Clients.All.showMsg(logMessage2);
+                    //await _hubContext.Clients.All.showMsg(logMessage2);
                     //记录到日志文件
                     this._logger.LogInformation(logMessage2.Content);
                 }

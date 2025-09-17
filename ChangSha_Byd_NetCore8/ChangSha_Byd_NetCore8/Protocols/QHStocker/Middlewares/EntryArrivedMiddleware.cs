@@ -26,7 +26,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
             try
             {
                 context.MstMsg.GateWay.EC010_A库口 = await this.EntryArrivedBase(context.PlcInfo.EC010_A库口, context.MstMsg.GateWay.EC010_A库口, QH_EntryLocation.EC010_A工位入口);
-                context.MstMsg.GateWay.EC010_B库口 = await this.EntryArrivedBase(context.PlcInfo.EC010_B库口, context.MstMsg.GateWay.EC010_A库口, QH_EntryLocation.EC010_B工位入口);
+                context.MstMsg.GateWay.EC010_B库口 = await this.EntryArrivedBase(context.PlcInfo.EC010_B库口, context.MstMsg.GateWay.EC010_B库口, QH_EntryLocation.EC010_B工位入口);
             }
             catch (Exception e)
             {
