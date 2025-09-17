@@ -1,6 +1,7 @@
 ﻿using ChangSha_Byd_NetCore8.fan.middlewares;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Mst;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Plc;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.SnapShot;
 using System.Text.Json.Serialization;
 
 namespace ChangSha_Byd_NetCore8.Extends.Scan
@@ -48,8 +49,14 @@ namespace ChangSha_Byd_NetCore8.Extends.Scan
         public MstMsg Pending { get; }
 
         [JsonIgnore]
+        public PlcMsg PeddingPlc { get; set; }
+
+        [JsonIgnore]
         public IServiceProvider ServiceProvider { get; }
 
         public DateTime CreatedAt { get; }
+
+
+
     }
 }

@@ -1,11 +1,13 @@
 <template>
     <TongYongQH v-bind="context_temp"></TongYongQH>
+	<TongYongQHWrite></TongYongQHWrite>
 </template>
 
 <script setup>
 import TongYongQH from '@/components/TongYongQH.vue'
 import { onMounted, ref} from 'vue';
 import * as signalrs from '@/utils/signalr'
+import TongYongQHWrite from '@/components/TongYongQHWrite.vue';
 
 const context_temp = ref({})
 
@@ -13,25 +15,23 @@ const context_temp = ref({})
 onMounted(() => {
     signalrs.startNewConnection('duiduoji')
     window.RefreshPlcMsg = RefreshPlcMsg
-    window.RefreshMsg = this.RefreshMsg
+    window.RefreshMsg = RefreshMsg
 })
 
 const RefreshPlcMsg = (data, no) => {
     console.log('Received data:', data, 'no:', no);
     if (no == 1) {
-        console.log('CW data updated:', data);
+		
     } else if (no == 2) {
         context_temp.value = data;
-        console.log('QH data updated:', data);
     }
 }
 
 
 const RefreshMsg = (data) => {
-    if (data != null) {　
+    if (data != null) {
         data.createTime = formatTime('hh:mm:ss')
         msg.value.unshift(data)
-
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using ChangSha_Byd_NetCore8.Extends.Scan;
 using ChangSha_Byd_NetCore8.Hub;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares.PublishNotification;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.SnapShot;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Memory;
@@ -27,7 +28,9 @@ namespace ChangSha_Byd_NetCore8.Handler
         {
             ScanContext context = notification.Context;
             //发送消息给客户端
-            await _hubContext.Clients.All.receiveQHStockerMsg(context);
+            var snap = context.ToSnapshot();
+
+            await _hubContext.Clients.All.receiveQHStockerMsg(snap);
 
         }
     }

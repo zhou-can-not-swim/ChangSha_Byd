@@ -22,7 +22,7 @@ namespace ChangSha_Byd_NetCore8.Handler
         {
 
             //通过SignalR推送到前端
-            await _hubContext.Clients.All.showMsg(notification.LogMessage);
+            //await _hubContext.Clients.All.showMsg(notification.LogMessage);
             this._logger.LogInformation(notification.LogMessage.Content);
         }
 

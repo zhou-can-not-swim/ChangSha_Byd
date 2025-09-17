@@ -1,4 +1,4 @@
-﻿namespace Infra
+﻿namespace ChangSha_Byd_NetCore8.OpenAuth.Infra
 {
     public class Response
     {

@@ -26,7 +26,11 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
             try
             {
                 context.MstMsg.GateWay.EC010_A库口 = await this.EntryArrivedBase(context.PlcInfo.EC010_A库口, context.MstMsg.GateWay.EC010_A库口, QH_EntryLocation.EC010_A工位入口);
-                context.MstMsg.GateWay.EC010_B库口 = await this.EntryArrivedBase(context.PlcInfo.EC010_B库口, context.MstMsg.GateWay.EC010_A库口, QH_EntryLocation.EC010_B工位入口);
+                context.MstMsg.GateWay.EC010_B库口 = await this.EntryArrivedBase(context.PlcInfo.EC010_B库口, context.MstMsg.GateWay.EC010_B库口, QH_EntryLocation.EC010_B工位入口);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("异常："+e);
             }
             finally
             {
@@ -34,7 +38,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
             }
         }
 
-        //mst的一个库口信息，包括就位确认和rfid等信息
+        //mst的一个库口信息，包括(100.0)就位确认和rfid等信息
         public async Task<MstMsg_GateWay> EntryArrivedBase(
             PlcInfo_Gateway plcInfo_Gateway,
             MstMsg_GateWay mstMsg_GateWay,//最原始的mst 字节信息

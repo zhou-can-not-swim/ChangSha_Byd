@@ -12,6 +12,8 @@ namespace ChangSha_Byd_NetCore8.Protocols.Common
 
         public string Rfid16 { get; set; }//夹具库此时作为16进制使用
 
+        public string Remark { get; set; } = "";//
+
         public string RFIDTen { get; set; } = "";//夹具库新增10进制    
     }
 

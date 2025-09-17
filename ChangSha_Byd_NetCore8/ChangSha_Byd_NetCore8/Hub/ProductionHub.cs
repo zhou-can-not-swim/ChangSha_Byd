@@ -1,5 +1,6 @@
 ﻿using ChangSha_Byd_NetCore8.Extends.Scan;
 using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.Log;
+using ChangSha_Byd_NetCore8.Protocols.QHStocker.Model.SnapShot;
 using Microsoft.AspNetCore.SignalR;
 
 namespace ChangSha_Byd_NetCore8.Hub
@@ -7,7 +8,8 @@ namespace ChangSha_Byd_NetCore8.Hub
     public interface IProductionHub
     {
 
-        Task receiveQHStockerMsg(ScanContext context);
+        //Task receiveQHStockerMsg(ScanContext context);
+        Task receiveQHStockerMsg(ScanSnapshot context);
 
 
         ///// <summary>
@@ -22,7 +24,7 @@ namespace ChangSha_Byd_NetCore8.Hub
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        Task showMsg(LogMessage alarmmsg);
+        //Task showMsg(LogMessage alarmmsg);
 
     }
 

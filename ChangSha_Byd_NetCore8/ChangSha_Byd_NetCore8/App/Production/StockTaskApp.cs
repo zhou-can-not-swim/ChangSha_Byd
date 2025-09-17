@@ -10,11 +10,12 @@ using ChangSha_Byd_NetCore8.OpenAuth.Infra;
 using ChangSha_Byd_NetCore8.Protocols.Common;
 using FutureTech.Dal.Repository;
 using FutureTech.Dal.Services;
-using Infra;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using TaskStatus = ChangSha_Byd_NetCore8.Protocols.Common.TaskStatus;
 
 namespace ChangSha_Byd_NetCore8.App.Production
@@ -191,33 +192,57 @@ namespace ChangSha_Byd_NetCore8.App.Production
 
             if (input.TaskType == 2)//任务号为2是出库
             {
-                //if (currentWarehouseId == 6)
-                //{
-                //    //代表侧围库
-                //    var s = await this.Repository.Query(query.New().ApplyOrderBy(a => a.GatewayId).ApplyOrderBy(a => a.CarTypeNum)).AsNoTracking().FirstOrDefaultAsync();
+                ////按照库口顺序出库
+                //return await Repository.Query(
+                //    query.New()
+                //    .ApplyOrderBy(a => a.GatewayId)
+                //    .ApplyOrderByDescending(a => a.Priority)
+                //    .ApplyOrderBy(a => a.Id))
+                //    .AsNoTracking()
+                //    .FirstOrDefaultAsync();
 
-                //    return s;
-                //}
-                //else
-                //{
-                //    //如果是出库任务，要先出B面，再出A面
-                //    return await this.Repository.Query(query.New().ApplyOrderByDescending(a => a.CarTypeFace).ApplyOrderByDescending(a => a.Priority).ApplyOrderBy(a => a.Id))
-                //        .AsNoTracking().FirstOrDefaultAsync();
-                //}
-
-                //按照库口顺序出库
                 return await Repository.Query(
                     query.New()
                     .ApplyOrderBy(a => a.GatewayId)
                     .ApplyOrderByDescending(a => a.Priority)
                     .ApplyOrderBy(a => a.Id))
+                    .Select(x => new StockTask // 创建DTO或匿名对象
+                    {
+                        Id = x.Id,
+                        Code = x.Code,
+                        WarehouseId = x.WarehouseId,
+                        AreaId = x.AreaId,
+                        AreaName = x.AreaName,
+                        TaskType = x.TaskType,
+                        IsRepair = x.IsRepair,
+                        TaskStatus = x.TaskStatus,
+                        Priority = x.Priority,
+                        CarTypeNum = x.CarTypeNum,
+                        CarTypeFace = x.CarTypeFace,
+                        CarTypeId = x.CarTypeId,
+                        CarTypeName = x.CarTypeName,
+                        CarTypeInt = x.CarTypeInt,
+                        CreateTime = x.CreateTime,
+                        //StartTime = x.StartTime,
+                        //CompleteTime = x.CompleteTime,
+                        LocationType = x.LocationType,
+                        GatewayId = x.GatewayId,
+                        GatewayName = x.GatewayName,
+                        EquipmentId = x.EquipmentId,
+                        EquipmentName = x.EquipmentName,
+                        TaskNo = x.TaskNo,
+                        OutLocationId = x.OutLocationId,
+                        OutLocationCode = x.OutLocationCode,
+                        InLocationId = x.InLocationId,
+                        InLocationCode = x.InLocationCode,
+                        SetTaskType = x.SetTaskType,
+                        // WarnContent = x.WarnContent,  // 排除这个字段
+                        RequestTaskTime = x.RequestTaskTime,
+                        JXCarTypeNum = x.JXCarTypeNum  // 排除这个字段
+
+                    })
                     .AsNoTracking()
                     .FirstOrDefaultAsync();
-
-
-
-
-
             }
             else
             {
@@ -280,6 +305,40 @@ namespace ChangSha_Byd_NetCore8.App.Production
                     .ApplyOrderByDescending(a => a.CarTypeFace) //ab面
                     .ApplyOrderByDescending(a => a.Priority)    //优先级
                     .ApplyOrderBy(a => a.RequestTaskTime))     //分拼请求校验RFID时间
+                    .Select(x => new StockTask // 创建DTO或匿名对象
+                    {
+                        Id = x.Id,
+                        Code = x.Code,
+                        WarehouseId = x.WarehouseId,
+                        AreaId = x.AreaId,
+                        AreaName = x.AreaName,
+                        TaskType = x.TaskType,
+                        IsRepair = x.IsRepair,
+                        TaskStatus = x.TaskStatus,
+                        Priority = x.Priority,
+                        CarTypeNum = x.CarTypeNum,
+                        CarTypeFace = x.CarTypeFace,
+                        CarTypeId = x.CarTypeId,
+                        CarTypeName = x.CarTypeName,
+                        CarTypeInt = x.CarTypeInt,
+                        CreateTime = x.CreateTime,
+                        //StartTime = x.StartTime,
+                        //CompleteTime = x.CompleteTime,
+                        LocationType = x.LocationType,
+                        GatewayId = x.GatewayId,
+                        GatewayName = x.GatewayName,
+                        EquipmentId = x.EquipmentId,
+                        EquipmentName = x.EquipmentName,
+                        TaskNo = x.TaskNo,
+                        OutLocationId = x.OutLocationId,
+                        OutLocationCode = x.OutLocationCode,
+                        InLocationId = x.InLocationId,
+                        InLocationCode = x.InLocationCode,
+                        SetTaskType = x.SetTaskType,
+                        // WarnContent = x.WarnContent,  // 排除这个字段
+                        RequestTaskTime = x.RequestTaskTime,
+                        JXCarTypeNum = x.JXCarTypeNum
+                    })  // 排除这个字段
                     .AsNoTracking().FirstOrDefaultAsync();
             }
             else
@@ -301,211 +360,236 @@ namespace ChangSha_Byd_NetCore8.App.Production
         ///// </summary>
         ///// <param name="input"></param>
         ///// <returns></returns>
-        //public async Task<StockTask> AddInStockTask(
-        //    AddInStockTaskInput input, 
-        //    CarType carType, 
-        //    Area_CarType_GateWay area_CarType_GateWayEntity, 
-        //    Location locationEntity,
-        //    string fengcheType = ""
-        //)
-        //{
-        //    var currentWarehouseId = _appConfiguration.Value.WarehouseId;
-        //    using (var transaction = _dBContext.Database.BeginTransaction()) //开启事务
-        //    {
-        //        try
-        //        {
-        //            StockTask entity = new StockTask();
-        //            entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //            entity.WarehouseId = currentWarehouseId;
-        //            entity.AreaId = area_CarType_GateWayEntity.AreaId;
-        //            entity.AreaName = area_CarType_GateWayEntity.Area.Name;
-        //            entity.TaskType = TaskType.入库;
-        //            entity.IsRepair = input.IsRepair;
-        //            entity.Remark = input.Remark;
-        //            entity.TaskStatus = Protocols.Common.TaskStatus.等待执行;
-        //            entity.Priority = TaskPriority.普通;
-        //            entity.CarTypeNum = input.CarTypeNum;
-        //            entity.CarTypeId = carType.Id;
+        public async Task<StockTask> AddInStockTask(
+            AddInStockTaskInput input,
+            CarType carType,
+            Area_CarType_GateWay area_CarType_GateWayEntity,
+            Location locationEntity
+        )
+        {
+            var currentWarehouseId = _appConfiguration.Value.WarehouseId;
+            using (var transaction = _dBContext.Database.BeginTransaction()) //开启事务
+            {
+                try
+                {
+                    StockTask entity = new StockTask();
+                    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    entity.WarehouseId = currentWarehouseId;
+                    entity.AreaId = area_CarType_GateWayEntity.AreaId;
+                    entity.AreaName = area_CarType_GateWayEntity.Area.Name;
+                    entity.TaskType = TaskType.入库;
+                    entity.IsRepair = input.IsRepair;
+                    entity.Remark = input.Remark;
+                    entity.TaskStatus = Protocols.Common.TaskStatus.等待执行;
+                    entity.Priority = TaskPriority.普通;
+                    entity.CarTypeNum = input.CarTypeNum;
+                    entity.CarTypeId = carType.Id;
 
 
-        //            //抓取当字符串中数字部分
-        //            int result_shuzi = int.Parse(System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"[^0-9]+", ""));
-        //            //抓取当字符串中字符部分
-        //            string result_zifu = System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"\d", "");
+                    //抓取当字符串中数字部分
+                    int result_shuzi = int.Parse(System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"[^0-9]+", ""));
+                    //抓取当字符串中字符部分
+                    string result_zifu = System.Text.RegularExpressions.Regex.Replace(input.CarTypeNum, @"\d", "");
+
+                    if (currentWarehouseId == 1) //CW库  区域 车型 工位 ab面
+                    {
+
+                        var chexingnumber = input.CarTypeNum.Substring(1, 1); //第二位是车型
+
+                        //HACK 模拟的Categorya表数据,但是rfid的第1位和第二位尽量不要使用1和2，1和2车型在数据库中有
+                        Category tempCategory = null;
 
 
-        //            //if (!string.IsNullOrEmpty(result_zifu))//有字符的
-        //            //{
-        //            //    entity.CarTypeName = carType.Name;
-        //            //    entity.CarTypeInt = int.Parse(result_shuzi.ToString().Substring(0, 1));
-        //            //    if (result_shuzi >= 10000)
-        //            //    {
-        //            //        entity.CarTypeFace = 1;//主线
-        //            //    }
-        //            //    else
-        //            //    {
-        //            //        entity.CarTypeFace = 2;//UB
-        //            //    }
-        //            //}
-        //            if (currentWarehouseId == 1) //侧围轮罩库  区域 车型 工位 ab面
-        //            {
+                        if (tempCategory != null)
+                        {
+                            //有车型的情况下
+                            entity.CarTypeName = tempCategory.Name; //赋值车型名字
+                            entity.CarTypeInt = tempCategory.DtValue; //车型
+                        }
+                        else
+                        {
+                            //没有车型的情况下
+                            entity.CarTypeName = "其他车型";
+                            entity.CarTypeInt = "0"; //车型
+                        }
 
-        //                var chexingnumber = input.CarTypeNum.Substring(1, 1); //第二位是车型
-        //                var tempCategory = await _osContext.Categories.Where(a => !a.IsDeleted && a.TypeId == "CarType" && a.DtValue == chexingnumber).AsNoTracking()
-        //                    .FirstOrDefaultAsync();
+                        if (input.CarTypeNum.Substring(3, 1) == "1")
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_A面";
+                            entity.CarTypeFace = 1;
+                        }
+                        else
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_B面";
+                            entity.CarTypeFace = 2;
+                        }
 
-        //                if (tempCategory != null)
-        //                {
-        //                    //有车型的情况下
-        //                    entity.CarTypeName = tempCategory.Name; //赋值车型名字
-        //                    entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                }
-        //                else
-        //                {
-        //                    //没有车型的情况下
-        //                    entity.CarTypeName = "其他车型";
-        //                    entity.CarTypeInt = "0"; //车型
-        //                }
+                        //entity.CarTypeInt = tempCategory.DtValue; //车型
+                        entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
+                    }
+                    else //QH库
+                    {
 
-        //                if (input.CarTypeNum.Substring(3, 1) == "1")
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_A面";
-        //                    entity.CarTypeFace = 1;
-        //                }
-        //                else
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_B面";
-        //                    entity.CarTypeFace = 2;
-        //                }
+                        var chexingnumber = input.CarTypeNum.Substring(1, 1); //rfid第二位是车型,在原来的数据库中只有1和2
+                        //TODO 可以通过query的方式直接获取车型，还没做（好像做不了，可以换一种思路）
+                        Category tempCategory = null;
+                        if (tempCategory != null)
+                        {
+                            //有车型的情况下
+                            entity.CarTypeName = tempCategory.Name; //赋值车型名字
+                            entity.CarTypeInt = tempCategory.DtValue; //车型
+                        }
+                        else
+                        {
+                            //没有车型的情况下
+                            entity.CarTypeName = "其他车型";
+                            entity.CarTypeInt = "0"; //车型
+                        }
 
-        //                //entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
+                        //从索引3开始取长度为1的字符 -->取第4个字符是不是1
+                        if (input.CarTypeNum.Substring(3, 1) == "1")
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_A面";
+                            entity.CarTypeFace = 1;
+                        }
+                        else
+                        {
+                            entity.CarTypeName += "_" + carType.Name + "_B面";
+                            entity.CarTypeFace = 2;
+                        }
 
+                        //entity.CarTypeInt = tempCategory.DtValue; //车型
+                        entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
+                    }
 
+                    entity.CreateTime = DateTime.Now;
 
+                    entity.GatewayId = area_CarType_GateWayEntity.InGatewayId;
+                    entity.GatewayName = area_CarType_GateWayEntity.InGateway.Name;
+                    entity.SetTaskType = 0;
 
+                    entity.EquipmentId = locationEntity.EquipmentId;
+                    entity.EquipmentName = locationEntity.Equipment.Name;
+                    entity.TaskNo = await _tempCodeApp.GetNewCode();
+                    ////取库位(新加的)
+                    entity.OutLocationId = area_CarType_GateWayEntity.InGatewayId;
+                    entity.OutLocationCode = area_CarType_GateWayEntity.InGateway.LocationCode;
+                    //放库位
+                    entity.InLocationId = locationEntity.Id;
+                    entity.InLocationCode = locationEntity.Code;
+                    entity.LocationType = locationEntity.LocationType;
 
-        //                //var rdidQ = input.CarTypeNum.Substring(0, 2);
-        //                //var rfidT = input.CarTypeNum.Substring(1, 1);
-        //                //var rfidLast = input.CarTypeNum.Substring(2, input.CarTypeNum.Length - 2);
+                    var res = await Repository.AddAsync(entity, false);
 
-        //                ////十六进制转十进制
-        //                //var rfidNumcode = Convert.ToInt32(rfidLast, 16);
+                    //修改库位状态
+                    locationEntity.LocationStatus = LocationStatus.锁定;
+                    locationEntity.Area = null;
+                    locationEntity.Equipment = null;
+                    locationEntity.Warehouse = null;
+                    await _locationApp.UpdateForTrackedAsync(locationEntity, false);
 
-        //                //var isrdidZifu = System.Text.RegularExpressions.Regex.Replace(rdidQ, @"\d", "");
-        //                //if (!string.IsNullOrEmpty(isrdidZifu))
-        //                //{
-        //                //    //MB
-        //                //    //判断是四线还是三线主线库
-        //                //    if (lineId == 4)
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AEC4" + rfidT + rfidNumcode.ToString().PadLeft(3, '0');
-        //                //    }
-        //                //    else
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AEC3" + rfidT + rfidNumcode.ToString().PadLeft(3, '0');
-        //                //    }
+                    await Repository.SaveChangesAsync();
+                    transaction.Commit();       //提交事务
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    string a = ex.Message;
+                    transaction.Rollback();     //回滚事务
+                    return null;
+                }
+            }
+        }
 
-        //                //    entity.CarTypeFace = 1; //MB线体区域(此字段当作视图中线体区域部分,只有主线库有特殊区别)
-
-        //                //}
-        //                //else
-        //                //{
-        //                //    //UB
-        //                //    //判断是四线还是三线主线库
-        //                //    if (lineId==4)
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AECU4" + rfidT + rfidNumcode.ToString().PadLeft(2, '0');
-        //                //    }
-        //                //    else
-        //                //    {
-        //                //        entity.JXCarTypeNum = "AECU3" + rfidT + rfidNumcode.ToString().PadLeft(2, '0');
-        //                //    }
-
-        //                //    entity.CarTypeFace = 2; //UB线体区域(此字段当作视图中线体区域部分,只有主线库有特殊区别)
-
-        //                //}
-
-        //                //entity.CarTypeName = carType.Name;
-        //                ////UB区域
-        //                //entity.CarTypeInt = fengcheType;
-        //            }
-        //            else //其他库
-        //            {
-        //                //其他夹具库为了区别3,4,5线八种夹具名字
-        //                var chexingnumber = input.CarTypeNum.Substring(1, 1); //第二位是车型
-        //                var tempCategory = await _osContext.Categories.Where(a => !a.IsDeleted && a.TypeId == "CarType" && a.DtValue == chexingnumber).AsNoTracking()
-        //                    .FirstOrDefaultAsync();
-
-        //                if (tempCategory != null)
-        //                {
-        //                    //有车型的情况下
-        //                    entity.CarTypeName = tempCategory.Name; //赋值车型名字
-        //                    entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                }
-        //                else
-        //                {
-        //                    //没有车型的情况下
-        //                    entity.CarTypeName = "其他车型";
-        //                    entity.CarTypeInt = "0"; //车型
-        //                }
-
-        //                //从索引3开始取长度为1的字符 -->取第4个字符是不是1
-        //                if (input.CarTypeNum.Substring(3, 1) == "1")
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_A面";
-        //                    entity.CarTypeFace = 1;
-        //                }
-        //                else
-        //                {
-        //                    entity.CarTypeName += "_" + carType.Name + "_B面";
-        //                    entity.CarTypeFace = 2;
-        //                }
-
-        //                //entity.CarTypeInt = tempCategory.DtValue; //车型
-        //                entity.JXCarTypeNum = input.RFIDTen;//夹具库新增RFID十进制
-        //            }
-
-        //            entity.CreateTime = DateTime.Now;
-
-        //            entity.GatewayId = area_CarType_GateWayEntity.InGatewayId;
-        //            entity.GatewayName = area_CarType_GateWayEntity.InGateway.Name;
-        //            entity.SetTaskType = 0;
-
-        //            entity.EquipmentId = locationEntity.EquipmentId;
-        //            entity.EquipmentName = locationEntity.Equipment.Name;
-        //            entity.TaskNo = await _tempCodeApp.GetNewCode();
-        //            //取库位(新加的)
-        //            entity.OutLocationId = area_CarType_GateWayEntity.InGatewayId;
-        //            entity.OutLocationCode = area_CarType_GateWayEntity.InGateway.LocationCode;
-        //            //放库位
-        //            entity.InLocationId = locationEntity.Id;
-        //            entity.InLocationCode = locationEntity.Code;
-        //            entity.LocationType = locationEntity.LocationType;
-
-        //            var res = await Repository.AddAsync(entity, false);
-
-        //            //修改库位状态
-        //            locationEntity.LocationStatus = LocationStatus.锁定;
-        //            locationEntity.Area = null;
-        //            locationEntity.Equipment = null;
-        //            locationEntity.Warehouse = null;
-        //            await _locationApp.UpdateForTrackedAsync(locationEntity, false);
-
-        //            await Repository.SaveChangesAsync();
-        //            transaction.Commit();       //提交事务
-        //            return res;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            string a = ex.Message;
-        //            transaction.Rollback();     //回滚事务
-        //            return null;
-        //        }
-        //    }
-        //}
-
-
+        #region Category表
+        public partial class Category
+        {
+            public Category()
+            {
+                this.Name = string.Empty;
+                this.DtCode = string.Empty;
+                this.DtValue = string.Empty;
+                this.SortNo = 0;
+                this.Description = string.Empty;
+                this.TypeId = string.Empty;
+                this.CreateTime = DateTime.Now;
+                this.CreateUserId = string.Empty;
+                this.CreateUserName = string.Empty;
+                this.UpdateTime = DateTime.Now;
+                this.UpdateUserId = string.Empty;
+                this.UpdateUserName = string.Empty;
+                this.IsDeleted = false;
+            }
+            public bool IsDeleted { get; set; }
+            /// <summary>
+            /// 名称
+            /// </summary>
+            [Description("名称")]
+            public string Name { get; set; }
+            /// <summary>
+            /// 代码
+            /// </summary>
+            [Description("代码")]
+            public string DtCode { get; set; }
+            /// <summary>
+            /// 通常与字典代码标识一致，但万一有不一样的情况呢？
+            /// </summary>
+            [Description("值")]
+            public string DtValue { get; set; }
+            /// <summary>
+            /// 是否可用
+            /// </summary>
+            [Description("是否可用")]
+            public bool Enable { get; set; }
+            /// <summary>
+            /// 排序号
+            /// </summary>
+            [Description("排序号")]
+            public int SortNo { get; set; }
+            /// <summary>
+            /// 描述
+            /// </summary>
+            [Description("描述")]
+            public string Description { get; set; }
+            /// <summary>
+            /// 分类ID
+            /// </summary>
+            [Description("分类标识")]
+            public string TypeId { get; set; }
+            /// <summary>
+            /// 创建时间
+            /// </summary>
+            [Description("创建时间")]
+            public System.DateTime CreateTime { get; set; }
+            /// <summary>
+            /// 创建人ID
+            /// </summary>
+            [Description("创建人ID")]
+            [Browsable(false)]
+            public string CreateUserId { get; set; }
+            /// <summary>
+            /// 创建人
+            /// </summary>
+            [Description("创建人")]
+            public string CreateUserName { get; set; }
+            /// <summary>
+            /// 最后更新时间
+            /// </summary>
+            [Description("最后更新时间")]
+            public System.DateTime? UpdateTime { get; set; }
+            /// <summary>
+            /// 最后更新人ID
+            /// </summary>
+            [Description("最后更新人ID")]
+            [Browsable(false)]
+            public string UpdateUserId { get; set; }
+            /// <summary>
+            /// 最后更新人
+            /// </summary>
+            [Description("最后更新人")]
+            public string UpdateUserName { get; set; }
+        }
+        #endregion
         /// <summary>
         /// 任务是否已存在
         /// </summary>
@@ -542,17 +626,17 @@ namespace ChangSha_Byd_NetCore8.App.Production
                     var i = await _inventoryApp.GetInventoryEntity(input);
                     if (i != null)
                     {
-                        result.Result = false;
+                        result.Result = true;
                         result.Message = "该台车已在立库!";
                     }
                     else
                     {
-                        result.Result = true;
+                        result.Result = false;
                     }
                 }
                 else
                 {
-                    result.Result = true;
+                    result.Result = false;
                 }
             }
             return result;
@@ -906,293 +990,293 @@ namespace ChangSha_Byd_NetCore8.App.Production
         //}
 
         #region 移库 更新任务级 任务状态  没使用过
-        ///// <summary>
-        ///// 前端添加手动移库任务，我好像没怎么用到移库
-        ///// </summary>
-        ///// <param name="input"></param>
-        ///// <returns></returns>
-        //public async Task<bool> AddRemoveStockTask(Inventory inventoryEntity, int RemoveCount)
-        //{
-        //    using (var transaction = _dBContext.Database.BeginTransaction())
-        //    {
-        //        try
-        //        {
-        //            //首先判断是哪一个库,主线库的话，分区域
-        //            if (_appConfiguration.Value.WarehouseId == 1)
-        //            {
-        //                //获取同个区域的未禁用，未使用的库位
-        //                QueryLocationReq queryLocationReq = new QueryLocationReq() { IsDisabled = false, AreaId = inventoryEntity.AreaId, Status = 0, IsKukou = false };
-        //                var locationList = await _locationApp.GetList(queryLocationReq);
-        //                var MaxCloumn = locationList.OrderByDescending(s => s.ColumnNo).Take(5).ToList(); //查询集合对象中某库位最大的列数按倒序排列，并且返回前五条数据
-        //                var MaxFloor = MaxCloumn.OrderByDescending(s => s.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最大的列数再次根据最大层数排列，并且返回第一条数据(最终要到的列数)
-        //                var MinCloumn = locationList.OrderBy(t => t.ColumnNo).Take(5).ToList(); //根据查询集合对象中某库位最小的列数排序，并且返回前五条数据
-        //                var MinFloor = MinCloumn.OrderBy(t => t.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最小的列数排序再次根据最小层数排列，并且返回第一条数据(最终要得到的最小列数)
-        //                List<StockTask> addList = new List<StockTask>();
-        //                List<Location> updateList = new List<Location>();
+        /// <summary>
+        /// 前端添加手动移库任务，我好像没怎么用到移库
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<bool> AddRemoveStockTask(Inventory inventoryEntity, int RemoveCount)
+        {
+            using (var transaction = _dBContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    //首先判断是哪一个库,主线库的话，分区域
+                    if (_appConfiguration.Value.WarehouseId == 1)
+                    {
+                        //获取同个区域的未禁用，未使用的库位
+                        QueryLocationReq queryLocationReq = new QueryLocationReq() { IsDisabled = false, AreaId = inventoryEntity.AreaId, Status = 0, IsKukou = false };
+                        var locationList = await _locationApp.GetList(queryLocationReq);
+                        var MaxCloumn = locationList.OrderByDescending(s => s.ColumnNo).Take(5).ToList(); //查询集合对象中某库位最大的列数按倒序排列，并且返回前五条数据
+                        var MaxFloor = MaxCloumn.OrderByDescending(s => s.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最大的列数再次根据最大层数排列，并且返回第一条数据(最终要到的列数)
+                        var MinCloumn = locationList.OrderBy(t => t.ColumnNo).Take(5).ToList(); //根据查询集合对象中某库位最小的列数排序，并且返回前五条数据
+                        var MinFloor = MinCloumn.OrderBy(t => t.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最小的列数排序再次根据最小层数排列，并且返回第一条数据(最终要得到的最小列数)
+                        List<StockTask> addList = new List<StockTask>();
+                        List<Location> updateList = new List<Location>();
 
-        //                //库存状态修改
-        //                inventoryEntity.Status = 2;
-        //                await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
-        //                Location NowLocation = await _locationApp.GetByIdAsync(inventoryEntity.LocationId);
-        //                //修改取货的库位状态
-        //                NowLocation.LocationStatus = LocationStatus.锁定;
-        //                NowLocation.Area = null;
-        //                NowLocation.Equipment = null;
-        //                NowLocation.Warehouse = null;
+                        //库存状态修改
+                        inventoryEntity.Status = 2;
+                        await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
+                        Location NowLocation = await _locationApp.GetByIdAsync(inventoryEntity.LocationId);
+                        //修改取货的库位状态
+                        NowLocation.LocationStatus = LocationStatus.锁定;
+                        NowLocation.Area = null;
+                        NowLocation.Equipment = null;
+                        NowLocation.Warehouse = null;
 
-        //                await _locationApp.UpdateForNotTrackedAsync(NowLocation, false);
-        //                string entityCode = "";
-        //                for (var rc = 1; rc <= RemoveCount; rc++)
-        //                {
-        //                    StockTask entity = new StockTask();
-        //                    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //                    entity.WarehouseId = _appConfiguration.Value.WarehouseId;
-        //                    entity.AreaId = inventoryEntity.AreaId;
-        //                    entity.AreaName = inventoryEntity.AreaName;
-        //                    entity.TaskType = TaskType.移库;
-        //                    entity.IsRepair = false;
-        //                    entity.TaskStatus = TaskStatus.等待执行;
-        //                    entity.Priority = TaskPriority.普通;
-        //                    entity.CarTypeNum = inventoryEntity.CarTypeNum;
-        //                    entity.CarTypeFace = inventoryEntity.CarTypeFace;
-        //                    entity.CarTypeId = (int)inventoryEntity.CarTypeId;
-        //                    entity.CarTypeName = inventoryEntity.CarTypeName;
-        //                    entity.CarTypeInt = inventoryEntity.CarTypeInt;
-        //                    entity.CreateTime = DateTime.Now;
-        //                    entity.JXCarTypeNum = inventoryEntity.JXCarTypeNum;
-        //                    entity.SetTaskType = 0;
-        //                    entity.TaskNo = await _tempCodeApp.GetNewCode();
-        //                    entity.OutLocationId = NowLocation.Id;
-        //                    entity.OutLocationCode = NowLocation.Code;
-        //                    //随机生成库位
-        //                    //int r = new Random().Next(locationList.Count);
-        //                    Location inLocaiton = null;
-        //                    if (rc % 2 != 0)
-        //                    {
-        //                        //循环次数为奇数的话,也就是从起始位置到最大列数
-        //                        inLocaiton = MaxFloor[0];
-        //                        entity.InLocationId = inLocaiton.Id;
-        //                        entity.InLocationCode = inLocaiton.Code;
-        //                    }
-        //                    else if (rc % 2 == 0)
-        //                    {
-        //                        //循环次数为偶数的话,也就是从目的位置到最小列数
-        //                        inLocaiton = MinFloor[0];
-        //                        entity.InLocationId = inLocaiton.Id;
-        //                        entity.InLocationCode = inLocaiton.Code;
-        //                    }
-        //                    //Location inLocaiton = MaxFloor[0];
-        //                    //entity.InLocationId = inLocaiton.Id;
-        //                    //entity.InLocationCode = inLocaiton.Code;
+                        await _locationApp.UpdateForNotTrackedAsync(NowLocation, false);
+                        string entityCode = "";
+                        for (var rc = 1; rc <= RemoveCount; rc++)
+                        {
+                            StockTask entity = new StockTask();
+                            entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                            entity.WarehouseId = _appConfiguration.Value.WarehouseId;
+                            entity.AreaId = inventoryEntity.AreaId;
+                            entity.AreaName = inventoryEntity.AreaName;
+                            entity.TaskType = TaskType.移库;
+                            entity.IsRepair = false;
+                            entity.TaskStatus = TaskStatus.等待执行;
+                            entity.Priority = TaskPriority.普通;
+                            entity.CarTypeNum = inventoryEntity.CarTypeNum;
+                            entity.CarTypeFace = inventoryEntity.CarTypeFace;
+                            entity.CarTypeId = (int)inventoryEntity.CarTypeId;
+                            entity.CarTypeName = inventoryEntity.CarTypeName;
+                            entity.CarTypeInt = inventoryEntity.CarTypeInt;
+                            entity.CreateTime = DateTime.Now;
+                            entity.JXCarTypeNum = inventoryEntity.JXCarTypeNum;
+                            entity.SetTaskType = 0;
+                            entity.TaskNo = await _tempCodeApp.GetNewCode();
+                            entity.OutLocationId = NowLocation.Id;
+                            entity.OutLocationCode = NowLocation.Code;
+                            //随机生成库位
+                            //int r = new Random().Next(locationList.Count);
+                            Location inLocaiton = null;
+                            if (rc % 2 != 0)
+                            {
+                                //循环次数为奇数的话,也就是从起始位置到最大列数
+                                inLocaiton = MaxFloor[0];
+                                entity.InLocationId = inLocaiton.Id;
+                                entity.InLocationCode = inLocaiton.Code;
+                            }
+                            else if (rc % 2 == 0)
+                            {
+                                //循环次数为偶数的话,也就是从目的位置到最小列数
+                                inLocaiton = MinFloor[0];
+                                entity.InLocationId = inLocaiton.Id;
+                                entity.InLocationCode = inLocaiton.Code;
+                            }
+                            //Location inLocaiton = MaxFloor[0];
+                            //entity.InLocationId = inLocaiton.Id;
+                            //entity.InLocationCode = inLocaiton.Code;
 
-        //                    entity.LocationType = 0;
-        //                    entity.EquipmentId = inLocaiton.EquipmentId;
-        //                    entity.EquipmentName = inLocaiton.Equipment == null ? "" : inLocaiton.Equipment.Name;
-        //                    if (rc == 1)
-        //                    {
-        //                        entityCode = entity.Code;
-        //                        entity.Remark = "手动下发移库任务。";
-        //                    }
-        //                    else
-        //                    {
-        //                        entity.Remark = entityCode + "移库任务复制任务。";
-        //                    }
-
-
-        //                    //修改放货的库位状态
-        //                    inLocaiton.LocationStatus = LocationStatus.锁定;
-        //                    inLocaiton.Area = null;
-        //                    inLocaiton.Equipment = null;
-        //                    inLocaiton.Warehouse = null;
-        //                    await _locationApp.UpdateForNotTrackedAsync(inLocaiton, false);
-        //                    await Repository.AddAsync(entity, false);
-        //                    await Repository.SaveChangesAsync();
-
-        //                    NowLocation = inLocaiton;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                //除了主线库以外其他夹具库
-
-        //                //获取同个区域的未禁用，未使用的库位
-        //                QueryLocationReq queryLocationReq = new QueryLocationReq() { IsDisabled = false, Status = 0, IsKukou = false };
-        //                var locationList = await _locationApp.GetList(queryLocationReq);
-        //                var MaxCloumn = locationList.OrderByDescending(s => s.ColumnNo).Take(5).ToList(); //查询集合对象中某库位最大的列数按倒序排列，并且返回前五条数据
-        //                var MaxFloor = MaxCloumn.OrderByDescending(s => s.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最大的列数再次根据最大层数排列，并且返回第一条数据(最终要到的列数)
-        //                var MinCloumn = locationList.OrderBy(t => t.ColumnNo).Take(5).ToList(); //根据查询集合对象中某库位最小的列数排序，并且返回前五条数据
-        //                var MinFloor = MinCloumn.OrderBy(t => t.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最小的列数排序再次根据最小层数排列，并且返回第一条数据(最终要得到的最小列数)
-        //                List<StockTask> addList = new List<StockTask>();
-        //                List<Location> updateList = new List<Location>();
-
-        //                //库存状态修改
-        //                inventoryEntity.Status = 2;
-        //                await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
-        //                Location NowLocation = await _locationApp.GetByIdAsync(inventoryEntity.LocationId);
-        //                //修改取货的库位状态
-        //                NowLocation.LocationStatus = LocationStatus.锁定;
-        //                NowLocation.Area = null;
-        //                NowLocation.Equipment = null;
-        //                NowLocation.Warehouse = null;
-
-        //                await _locationApp.UpdateForNotTrackedAsync(NowLocation, false);
-        //                string entityCode = "";
-        //                for (var rc = 1; rc <= RemoveCount; rc++)
-        //                {
-        //                    StockTask entity = new StockTask();
-        //                    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //                    entity.WarehouseId = _appConfiguration.Value.WarehouseId;
-        //                    entity.AreaId = inventoryEntity.AreaId;
-        //                    entity.AreaName = inventoryEntity.AreaName;
-        //                    entity.TaskType = TaskType.移库;
-        //                    entity.IsRepair = false;
-        //                    entity.TaskStatus = TaskStatus.等待执行;
-        //                    entity.Priority = TaskPriority.普通;
-        //                    entity.CarTypeNum = inventoryEntity.CarTypeNum;
-        //                    entity.CarTypeFace = inventoryEntity.CarTypeFace;
-        //                    entity.CarTypeId = (int)inventoryEntity.CarTypeId;
-        //                    entity.CarTypeName = inventoryEntity.CarTypeName;
-        //                    entity.CarTypeInt = inventoryEntity.CarTypeInt;
-        //                    entity.CreateTime = DateTime.Now;
-        //                    entity.SetTaskType = 0;
-        //                    entity.TaskNo = await _tempCodeApp.GetNewCode();
+                            entity.LocationType = 0;
+                            entity.EquipmentId = inLocaiton.EquipmentId;
+                            entity.EquipmentName = inLocaiton.Equipment == null ? "" : inLocaiton.Equipment.Name;
+                            if (rc == 1)
+                            {
+                                entityCode = entity.Code;
+                                entity.Remark = "手动下发移库任务。";
+                            }
+                            else
+                            {
+                                entity.Remark = entityCode + "移库任务复制任务。";
+                            }
 
 
-        //                    entity.OutLocationId = NowLocation.Id;
-        //                    entity.OutLocationCode = NowLocation.Code;
+                            //修改放货的库位状态
+                            inLocaiton.LocationStatus = LocationStatus.锁定;
+                            inLocaiton.Area = null;
+                            inLocaiton.Equipment = null;
+                            inLocaiton.Warehouse = null;
+                            await _locationApp.UpdateForNotTrackedAsync(inLocaiton, false);
+                            await Repository.AddAsync(entity, false);
+                            await Repository.SaveChangesAsync();
 
-        //                    //int r = new Random().Next(locationList.Count);
-        //                    //Location inLocaiton = locationList[r];
-        //                    Location inLocaiton = null;
-        //                    if (rc % 2 != 0)
-        //                    {
-        //                        //循环次数为奇数的话,也就是从起始位置到最大列数
-        //                        inLocaiton = MaxFloor[0];
-        //                        entity.InLocationId = inLocaiton.Id;
-        //                        entity.InLocationCode = inLocaiton.Code;
-        //                    }
-        //                    else if (rc % 2 == 0)
-        //                    {
-        //                        //循环次数为偶数的话,也就是从目的位置到最小列数
-        //                        inLocaiton = MinFloor[0];
-        //                        entity.InLocationId = inLocaiton.Id;
-        //                        entity.InLocationCode = inLocaiton.Code;
-        //                    }
+                            NowLocation = inLocaiton;
+                        }
+                    }
+                    else
+                    {
+                        //除了主线库以外其他夹具库
 
-        //                    entity.InLocationId = inLocaiton.Id;
-        //                    entity.InLocationCode = inLocaiton.Code;
+                        //获取同个区域的未禁用，未使用的库位
+                        QueryLocationReq queryLocationReq = new QueryLocationReq() { IsDisabled = false, Status = 0, IsKukou = false };
+                        var locationList = await _locationApp.GetList(queryLocationReq);
+                        var MaxCloumn = locationList.OrderByDescending(s => s.ColumnNo).Take(5).ToList(); //查询集合对象中某库位最大的列数按倒序排列，并且返回前五条数据
+                        var MaxFloor = MaxCloumn.OrderByDescending(s => s.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最大的列数再次根据最大层数排列，并且返回第一条数据(最终要到的列数)
+                        var MinCloumn = locationList.OrderBy(t => t.ColumnNo).Take(5).ToList(); //根据查询集合对象中某库位最小的列数排序，并且返回前五条数据
+                        var MinFloor = MinCloumn.OrderBy(t => t.FloorNo).Take(1).ToList(); //根据查询集合对象中某库位最小的列数排序再次根据最小层数排列，并且返回第一条数据(最终要得到的最小列数)
+                        List<StockTask> addList = new List<StockTask>();
+                        List<Location> updateList = new List<Location>();
 
-        //                    entity.LocationType = 0;
-        //                    entity.EquipmentId = inLocaiton.EquipmentId;
-        //                    entity.EquipmentName = inLocaiton.Equipment == null ? "" : inLocaiton.Equipment.Name;
-        //                    if (rc == 1)
-        //                    {
-        //                        entityCode = entity.Code;
-        //                        entity.Remark = "手动下发移库任务。";
-        //                    }
-        //                    else
-        //                    {
-        //                        entity.Remark = entityCode + "移库任务复制任务。";
-        //                    }
+                        //库存状态修改
+                        inventoryEntity.Status = 2;
+                        await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
+                        Location NowLocation = await _locationApp.GetByIdAsync(inventoryEntity.LocationId);
+                        //修改取货的库位状态
+                        NowLocation.LocationStatus = LocationStatus.锁定;
+                        NowLocation.Area = null;
+                        NowLocation.Equipment = null;
+                        NowLocation.Warehouse = null;
 
-        //                    //修改放货的库位状态
-        //                    inLocaiton.LocationStatus = LocationStatus.锁定;
-        //                    inLocaiton.Area = null;
-        //                    inLocaiton.Equipment = null;
-        //                    inLocaiton.Warehouse = null;
-        //                    await _locationApp.UpdateForNotTrackedAsync(inLocaiton, false);
-        //                    await Repository.AddAsync(entity, false);
-        //                    await Repository.SaveChangesAsync();
-        //                    NowLocation = inLocaiton;
-        //                }
-        //            }
-        //            //获取同个区域的未禁用，未使用的库位
-        //            //QueryLocationReq queryLocationReq = new QueryLocationReq() { IsDisabled = false, AreaId = inventoryEntity.AreaId, Status = 0 , IsKukou =false};
-        //            //var locationList = await _locationApp.GetList(queryLocationReq);
-
-
-        //            //List<StockTask> addList = new List<StockTask>();
-        //            //List<Location> updateList = new List<Location>();
-
-        //            ////库存状态修改
-        //            //inventoryEntity.Status = 2;
-        //            //await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
-        //            //Location NowLocation = await _locationApp.GetByIdAsync(inventoryEntity.LocationId);
-        //            ////修改取货的库位状态
-        //            //NowLocation.LocationStatus = LocationStatus.锁定;
-        //            //NowLocation.Area = null;
-        //            //NowLocation.Equipment = null;
-        //            //NowLocation.Warehouse = null;
-
-        //            //await _locationApp.UpdateForNotTrackedAsync(NowLocation, false);
-        //            //string entityCode = "";
-        //            //for (var rc = 1; rc <= RemoveCount; rc++)
-        //            //{
-
-        //            //    StockTask entity = new StockTask();
-        //            //    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //            //    entity.WarehouseId = _appConfiguration.Value.WarehouseId;
-        //            //    entity.AreaId = inventoryEntity.AreaId;
-        //            //    entity.AreaName = inventoryEntity.AreaName;
-        //            //    entity.TaskType = TaskType.移库;
-        //            //    entity.IsRepair = false;
-        //            //    entity.TaskStatus = Entities.TaskStatus.等待执行;
-        //            //    entity.Priority = TaskPriority.普通;
-        //            //    entity.CarTypeNum = inventoryEntity.CarTypeNum;
-        //            //    entity.CarTypeFace = inventoryEntity.CarTypeFace;
-        //            //    entity.CarTypeId = (int)inventoryEntity.CarTypeId;
-        //            //    entity.CarTypeName = inventoryEntity.CarTypeName;
-        //            //    entity.CarTypeInt = inventoryEntity.CarTypeInt;
-        //            //    entity.CreateTime = DateTime.Now;
-        //            //    entity.SetTaskType = 0;
-        //            //    entity.TaskNo = await _tempCodeApp.GetNewCode();
+                        await _locationApp.UpdateForNotTrackedAsync(NowLocation, false);
+                        string entityCode = "";
+                        for (var rc = 1; rc <= RemoveCount; rc++)
+                        {
+                            StockTask entity = new StockTask();
+                            entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                            entity.WarehouseId = _appConfiguration.Value.WarehouseId;
+                            entity.AreaId = inventoryEntity.AreaId;
+                            entity.AreaName = inventoryEntity.AreaName;
+                            entity.TaskType = TaskType.移库;
+                            entity.IsRepair = false;
+                            entity.TaskStatus = TaskStatus.等待执行;
+                            entity.Priority = TaskPriority.普通;
+                            entity.CarTypeNum = inventoryEntity.CarTypeNum;
+                            entity.CarTypeFace = inventoryEntity.CarTypeFace;
+                            entity.CarTypeId = (int)inventoryEntity.CarTypeId;
+                            entity.CarTypeName = inventoryEntity.CarTypeName;
+                            entity.CarTypeInt = inventoryEntity.CarTypeInt;
+                            entity.CreateTime = DateTime.Now;
+                            entity.SetTaskType = 0;
+                            entity.TaskNo = await _tempCodeApp.GetNewCode();
 
 
-        //            //    entity.OutLocationId = NowLocation.Id;
-        //            //    entity.OutLocationCode = NowLocation.Code;
+                            entity.OutLocationId = NowLocation.Id;
+                            entity.OutLocationCode = NowLocation.Code;
 
-        //            //    int r = new Random().Next(locationList.Count);
-        //            //    Location inLocaiton = locationList[r];
-        //            //    entity.InLocationId = inLocaiton.Id;
-        //            //    entity.InLocationCode = inLocaiton.Code;
+                            //int r = new Random().Next(locationList.Count);
+                            //Location inLocaiton = locationList[r];
+                            Location inLocaiton = null;
+                            if (rc % 2 != 0)
+                            {
+                                //循环次数为奇数的话,也就是从起始位置到最大列数
+                                inLocaiton = MaxFloor[0];
+                                entity.InLocationId = inLocaiton.Id;
+                                entity.InLocationCode = inLocaiton.Code;
+                            }
+                            else if (rc % 2 == 0)
+                            {
+                                //循环次数为偶数的话,也就是从目的位置到最小列数
+                                inLocaiton = MinFloor[0];
+                                entity.InLocationId = inLocaiton.Id;
+                                entity.InLocationCode = inLocaiton.Code;
+                            }
 
-        //            //    entity.LocationType = 0;
-        //            //    entity.EquipmentId = inLocaiton.EquipmentId;
-        //            //    entity.EquipmentName = inLocaiton.Equipment==null? "": inLocaiton.Equipment.Name;
-        //            //    if (rc == 1)
-        //            //    {
-        //            //        entityCode = entity.Code;
-        //            //        entity.Remark = "手动下发移库任务。";
-        //            //    }
-        //            //    else
-        //            //    {
-        //            //        entity.Remark = entityCode + "移库任务复制任务。";
-        //            //    }
+                            entity.InLocationId = inLocaiton.Id;
+                            entity.InLocationCode = inLocaiton.Code;
+
+                            entity.LocationType = 0;
+                            entity.EquipmentId = inLocaiton.EquipmentId;
+                            entity.EquipmentName = inLocaiton.Equipment == null ? "" : inLocaiton.Equipment.Name;
+                            if (rc == 1)
+                            {
+                                entityCode = entity.Code;
+                                entity.Remark = "手动下发移库任务。";
+                            }
+                            else
+                            {
+                                entity.Remark = entityCode + "移库任务复制任务。";
+                            }
+
+                            //修改放货的库位状态
+                            inLocaiton.LocationStatus = LocationStatus.锁定;
+                            inLocaiton.Area = null;
+                            inLocaiton.Equipment = null;
+                            inLocaiton.Warehouse = null;
+                            await _locationApp.UpdateForNotTrackedAsync(inLocaiton, false);
+                            await Repository.AddAsync(entity, false);
+                            await Repository.SaveChangesAsync();
+                            NowLocation = inLocaiton;
+                        }
+                    }
+                    //获取同个区域的未禁用，未使用的库位
+                    //QueryLocationReq queryLocationReq = new QueryLocationReq() { IsDisabled = false, AreaId = inventoryEntity.AreaId, Status = 0 , IsKukou =false};
+                    //var locationList = await _locationApp.GetList(queryLocationReq);
 
 
-        //            //    //修改放货的库位状态
-        //            //    inLocaiton.LocationStatus = LocationStatus.锁定;
-        //            //    inLocaiton.Area = null;
-        //            //    inLocaiton.Equipment = null;
-        //            //    inLocaiton.Warehouse = null;
-        //            //    await _locationApp.UpdateForNotTrackedAsync(inLocaiton, false);
-        //            //    await this.Repository.AddAsync(entity, false);
-        //            // await this.Repository.SaveChangesAsync();
+                    //List<StockTask> addList = new List<StockTask>();
+                    //List<Location> updateList = new List<Location>();
 
-        //            //    NowLocation = inLocaiton;
+                    ////库存状态修改
+                    //inventoryEntity.Status = 2;
+                    //await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
+                    //Location NowLocation = await _locationApp.GetByIdAsync(inventoryEntity.LocationId);
+                    ////修改取货的库位状态
+                    //NowLocation.LocationStatus = LocationStatus.锁定;
+                    //NowLocation.Area = null;
+                    //NowLocation.Equipment = null;
+                    //NowLocation.Warehouse = null;
+
+                    //await _locationApp.UpdateForNotTrackedAsync(NowLocation, false);
+                    //string entityCode = "";
+                    //for (var rc = 1; rc <= RemoveCount; rc++)
+                    //{
+
+                    //    StockTask entity = new StockTask();
+                    //    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    //    entity.WarehouseId = _appConfiguration.Value.WarehouseId;
+                    //    entity.AreaId = inventoryEntity.AreaId;
+                    //    entity.AreaName = inventoryEntity.AreaName;
+                    //    entity.TaskType = TaskType.移库;
+                    //    entity.IsRepair = false;
+                    //    entity.TaskStatus = Entities.TaskStatus.等待执行;
+                    //    entity.Priority = TaskPriority.普通;
+                    //    entity.CarTypeNum = inventoryEntity.CarTypeNum;
+                    //    entity.CarTypeFace = inventoryEntity.CarTypeFace;
+                    //    entity.CarTypeId = (int)inventoryEntity.CarTypeId;
+                    //    entity.CarTypeName = inventoryEntity.CarTypeName;
+                    //    entity.CarTypeInt = inventoryEntity.CarTypeInt;
+                    //    entity.CreateTime = DateTime.Now;
+                    //    entity.SetTaskType = 0;
+                    //    entity.TaskNo = await _tempCodeApp.GetNewCode();
 
 
-        //            //}
-        //            transaction.Commit();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            transaction.Rollback();
-        //            return false;
-        //        }
-        //    }
-        //}
+                    //    entity.OutLocationId = NowLocation.Id;
+                    //    entity.OutLocationCode = NowLocation.Code;
+
+                    //    int r = new Random().Next(locationList.Count);
+                    //    Location inLocaiton = locationList[r];
+                    //    entity.InLocationId = inLocaiton.Id;
+                    //    entity.InLocationCode = inLocaiton.Code;
+
+                    //    entity.LocationType = 0;
+                    //    entity.EquipmentId = inLocaiton.EquipmentId;
+                    //    entity.EquipmentName = inLocaiton.Equipment==null? "": inLocaiton.Equipment.Name;
+                    //    if (rc == 1)
+                    //    {
+                    //        entityCode = entity.Code;
+                    //        entity.Remark = "手动下发移库任务。";
+                    //    }
+                    //    else
+                    //    {
+                    //        entity.Remark = entityCode + "移库任务复制任务。";
+                    //    }
+
+
+                    //    //修改放货的库位状态
+                    //    inLocaiton.LocationStatus = LocationStatus.锁定;
+                    //    inLocaiton.Area = null;
+                    //    inLocaiton.Equipment = null;
+                    //    inLocaiton.Warehouse = null;
+                    //    await _locationApp.UpdateForNotTrackedAsync(inLocaiton, false);
+                    //    await this.Repository.AddAsync(entity, false);
+                    // await this.Repository.SaveChangesAsync();
+
+                    //    NowLocation = inLocaiton;
+
+
+                    //}
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
 
 
         ///// <summary>
@@ -1200,61 +1284,61 @@ namespace ChangSha_Byd_NetCore8.App.Production
         ///// </summary>
         ///// <param name="input"></param>
         ///// <returns></returns>
-        //public async Task<bool> UpdatePriority(UpdatePriorityInput input)
-        //{
-        //    var query = new Specification<StockTask>(a => !a.IsDeleted && input.SelectIds.Contains(a.Id));
-        //    var currentWarehouseId = _appConfiguration.Value.WarehouseId;
-        //    query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
-        //    var list = await Repository.Query(query).ToListAsync();
-        //    foreach (var item in list)
-        //    {
-        //        item.Priority = (TaskPriority)input.Priority;
-        //    }
+        public async Task<bool> UpdatePriority(UpdatePriorityInput input)
+        {
+            var query = new Specification<StockTask>(a => !a.IsDeleted && input.SelectIds.Contains(a.Id));
+            var currentWarehouseId = _appConfiguration.Value.WarehouseId;
+            query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
+            var list = await Repository.Query(query).ToListAsync();
+            foreach (var item in list)
+            {
+                item.Priority = (TaskPriority)input.Priority;
+            }
 
-        //    await Repository.UpdateRangeAsync(list, true);
-        //    await Repository.SaveChangesAsync();
-        //    return true;
-        //}
+            await Repository.UpdateRangeAsync(list, true);
+            await Repository.SaveChangesAsync();
+            return true;
+        }
 
-        ///// <summary>
-        ///// 手动更新任务状态
-        ///// </summary>
-        ///// <param name="input"></param>
-        ///// <returns></returns>
-        //public async Task<bool> UpdateTaskStatus(UpdateTaskStatusInput input)
-        //{
-        //    var query = new Specification<StockTask>(a => !a.IsDeleted && input.SelectIds.Contains(a.Id));
-        //    var currentWarehouseId = _appConfiguration.Value.WarehouseId;
-        //    query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
-        //    var list = await Repository.Query(query).AsNoTracking().ToListAsync();
+        /// <summary>
+        /// 手动更新任务状态
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<bool> UpdateTaskStatus(UpdateTaskStatusInput input)
+        {
+            var query = new Specification<StockTask>(a => !a.IsDeleted && input.SelectIds.Contains(a.Id));
+            var currentWarehouseId = _appConfiguration.Value.WarehouseId;
+            query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
+            var list = await Repository.Query(query).AsNoTracking().ToListAsync();
 
 
-        //    var result = false;
-        //    foreach (var item in list)
-        //    {
-        //        item.TaskStatus = (Entities.TaskStatus)input.TaskStatus;
-        //        if (item.TaskStatus == Entities.TaskStatus.正在执行)
-        //        {
-        //            result = await this.PLC_UpdateStockTask(item.TaskNo, Entities.TaskStatus.正在执行, 0);
-        //        }
-        //        else if (item.TaskStatus == Entities.TaskStatus.任务完成)
-        //        {
-        //            result = await this.PLC_UpdateStockTask(item.TaskNo, Entities.TaskStatus.任务完成, 0);
-        //        }
-        //        else if (item.TaskStatus == Entities.TaskStatus.取消任务)
-        //        {
-        //            result = await this.PLC_UpdateStockTask(item.TaskNo, Entities.TaskStatus.取消任务, 0);
-        //        }
-        //        else
-        //        {
-        //            item.Remark += "手动修改任务状态为" + item.TaskStatus.ToString() + "。";
-        //            await Repository.UpdateAsync(item, true);
-        //            result = true;
-        //        }
-        //    }
+            var result = false;
+            foreach (var item in list)
+            {
+                item.TaskStatus = (TaskStatus)input.TaskStatus;
+                if (item.TaskStatus == TaskStatus.正在执行)
+                {
+                    result = await this.PLC_UpdateStockTask(item.TaskNo, TaskStatus.正在执行, 0);
+                }
+                else if (item.TaskStatus == TaskStatus.任务完成)
+                {
+                    result = await this.PLC_UpdateStockTask(item.TaskNo, TaskStatus.任务完成, 0);
+                }
+                else if (item.TaskStatus == TaskStatus.取消任务)
+                {
+                    result = await this.PLC_UpdateStockTask(item.TaskNo, TaskStatus.取消任务, 0);
+                }
+                else
+                {
+                    item.Remark += "手动修改任务状态为" + item.TaskStatus.ToString() + "。";
+                    await Repository.UpdateAsync(item, true);
+                    result = true;
+                }
+            }
 
-        //    return result;
-        //}
+            return result;
+        }
 
 
 
@@ -1265,468 +1349,468 @@ namespace ChangSha_Byd_NetCore8.App.Production
         ///// <param name="taskStatus">任务状态</param>
         ///// <param name="setTaskType">0手动  1自动</param>
         ///// <returns></returns>
-        //public async Task<bool> PLC_UpdateStockTask(int taskNo, TaskStatus taskStatus, int setTaskType)
-        //{
-        //    using (var transaction = _dBContext.Database.BeginTransaction())
-        //    {
-        //        try
-        //        {
-        //            var status = taskStatus;
+        public async Task<bool> PLC_UpdateStockTask(int taskNo, TaskStatus taskStatus, int setTaskType)
+        {
+            using (var transaction = _dBContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var status = taskStatus;
 
-        //            //根据任务号获取TaskEntity
-        //            var query = new Specification<StockTask>(a => !a.IsDeleted && a.TaskNo == taskNo);
-        //            var currentWarehouseId = _appConfiguration.Value.WarehouseId;
-        //            query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
-        //            var entity = await Repository.Query(query).AsNoTracking().FirstOrDefaultAsync();
+                    //根据任务号获取TaskEntity
+                    var query = new Specification<StockTask>(a => !a.IsDeleted && a.TaskNo == taskNo);
+                    var currentWarehouseId = _appConfiguration.Value.WarehouseId;
+                    query.CombineCritia(u => u.WarehouseId == currentWarehouseId);
+                    var entity = await Repository.Query(query).AsNoTracking().FirstOrDefaultAsync();
 
-        //            if (entity != null)
-        //            {
-        //                entity.TaskStatus = status;
-        //                entity.SetTaskType = setTaskType;
-        //                if (status == Entities.TaskStatus.任务完成)
-        //                {
-        //                    if (setTaskType == 0)
-        //                    {
-        //                        entity.Remark += "手动完成任务。";
-        //                    }
+                    if (entity != null)
+                    {
+                        entity.TaskStatus = status;
+                        entity.SetTaskType = setTaskType;
+                        if (status == TaskStatus.任务完成)
+                        {
+                            if (setTaskType == 0)
+                            {
+                                entity.Remark += "手动完成任务。";
+                            }
 
-        //                    entity.CompleteTime = DateTime.Now;
+                            entity.CompleteTime = DateTime.Now;
 
-        //                    #region 处理库存
+                            #region 处理库存
 
-        //                    if (entity.TaskType == Entities.TaskType.入库)
-        //                    {
-        //                        #region 入库任务完成 添加库存信息
+                            if (entity.TaskType == TaskType.入库)
+                            {
+                                #region 入库任务完成 添加库存信息
 
-        //                        Inventory inventoryEntity = new Inventory();
-        //                        inventoryEntity.WarehouseId = entity.WarehouseId;
-        //                        inventoryEntity.AreaId = entity.AreaId;
-        //                        inventoryEntity.AreaName = entity.AreaName;
-        //                        inventoryEntity.LocationId = (int)entity.InLocationId;
-        //                        inventoryEntity.LocationCode = entity.InLocationCode;
-        //                        inventoryEntity.CarTypeId = entity.CarTypeId;
-        //                        inventoryEntity.CarTypeName = entity.CarTypeName;
-        //                        inventoryEntity.CarTypeNum = entity.CarTypeNum;
-        //                        inventoryEntity.CarTypeFace = entity.CarTypeFace;
-        //                        inventoryEntity.CarTypeInt = entity.CarTypeInt;
-        //                        inventoryEntity.CreateTime = DateTime.Now;
-        //                        inventoryEntity.Status = 1;
-        //                        inventoryEntity.SetTaskType = setTaskType;
-        //                        if (currentWarehouseId == 1)
-        //                        {
-        //                            //只有主线库才有plc编号转机械编号
-        //                            inventoryEntity.JXCarTypeNum = entity.JXCarTypeNum;
-        //                        }
-        //                        else
-        //                        {
-        //                            inventoryEntity.JXCarTypeNum = entity.JXCarTypeNum;//其他库作为十进制RFID使用
-        //                        }
-
-
-        //                        await _inventoryApp.AddAsync(inventoryEntity);
-
-        //                        #endregion
-        //                    }
-        //                    else if (entity.TaskType == Entities.TaskType.出库 || entity.TaskType == Entities.TaskType.存车修正)
-        //                    {
-        //                        #region 删除库存
-
-        //                        GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
-        //                        {
-        //                            LocationId = entity.OutLocationId
-        //                        };
-        //                        var inventoryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
-        //                        if (inventoryEntity != null)
-        //                        {
-        //                            await _inventoryApp.DeleteForNotTrakedAsync(inventoryEntity.Id, false);
-        //                        }
-
-        //                        #endregion
-        //                    }
-        //                    else if (entity.TaskType == Entities.TaskType.移库)
-        //                    {
-        //                        #region 修改库存
-
-        //                        GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
-        //                        {
-        //                            LocationId = entity.OutLocationId
-        //                        };
-        //                        var inventoryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
-        //                        if (inventoryEntity != null)
-        //                        {
-        //                            inventoryEntity.LocationId = (int)entity.InLocationId;
-        //                            inventoryEntity.LocationCode = entity.InLocationCode;
-        //                            await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
-        //                        }
-
-        //                        #endregion
-        //                    }
-
-        //                    #endregion
+                                Inventory inventoryEntity = new Inventory();
+                                inventoryEntity.WarehouseId = entity.WarehouseId;
+                                inventoryEntity.AreaId = entity.AreaId;
+                                inventoryEntity.AreaName = entity.AreaName;
+                                inventoryEntity.LocationId = (int)entity.InLocationId;
+                                inventoryEntity.LocationCode = entity.InLocationCode;
+                                inventoryEntity.CarTypeId = entity.CarTypeId;
+                                inventoryEntity.CarTypeName = entity.CarTypeName;
+                                inventoryEntity.CarTypeNum = entity.CarTypeNum;
+                                inventoryEntity.CarTypeFace = entity.CarTypeFace;
+                                inventoryEntity.CarTypeInt = entity.CarTypeInt;
+                                inventoryEntity.CreateTime = DateTime.Now;
+                                inventoryEntity.Status = 1;
+                                inventoryEntity.SetTaskType = setTaskType;
+                                if (currentWarehouseId == 1)
+                                {
+                                    //只有主线库才有plc编号转机械编号
+                                    inventoryEntity.JXCarTypeNum = entity.JXCarTypeNum;
+                                }
+                                else
+                                {
+                                    inventoryEntity.JXCarTypeNum = entity.JXCarTypeNum;//其他库作为十进制RFID使用
+                                }
 
 
-        //                    #region 新增StockTaskHistory
+                                await _inventoryApp.AddAsync(inventoryEntity);
 
-        //                    var historyEntity = new StockTaskHistory()
-        //                    {
-        //                        Code = entity.Code,
-        //                        WarehouseId = entity.WarehouseId,
-        //                        AreaId = entity.AreaId,
-        //                        AreaName = entity.AreaName,
-        //                        TaskType = entity.TaskType,
-        //                        IsRepair = entity.IsRepair,
-        //                        TaskStatus = entity.TaskStatus,
-        //                        Priority = entity.Priority,
-        //                        CarTypeNum = entity.CarTypeNum,
-        //                        CarTypeFace = entity.CarTypeFace,
-        //                        CarTypeId = entity.CarTypeId,
-        //                        CarTypeName = entity.CarTypeName,
-        //                        CarTypeInt = entity.CarTypeInt,
-        //                        CreateTime = entity.CreateTime,
-        //                        StartTime = entity.StartTime,
-        //                        CompleteTime = DateTime.Now,
-        //                        LocationType = entity.LocationType,
-        //                        GatewayId = entity.GatewayId,
-        //                        GatewayName = entity.GatewayName,
-        //                        EquipmentId = entity.EquipmentId,
-        //                        EquipmentName = entity.EquipmentName,
-        //                        TaskNo = entity.TaskNo,
-        //                        OutLocationId = entity.OutLocationId,
-        //                        OutLocationCode = entity.OutLocationCode,
-        //                        InLocationId = entity.InLocationId,
-        //                        InLocationCode = entity.InLocationCode,
-        //                        SetTaskType = setTaskType,
-        //                        WarnContent = entity.WarnContent,
-        //                        Remark = entity.Remark,
-        //                        RequestTaskTime = entity.RequestTaskTime,
-        //                        JXCarTypeNum = entity.JXCarTypeNum
-        //                    };
+                                #endregion
+                            }
+                            else if (entity.TaskType == TaskType.出库 || entity.TaskType == TaskType.存车修正)
+                            {
+                                #region 删除库存
 
-        //                    await _dBContext.AddAsync(historyEntity);
+                                GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
+                                {
+                                    LocationId = entity.OutLocationId
+                                };
+                                var inventoryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
+                                if (inventoryEntity != null)
+                                {
+                                    await _inventoryApp.DeleteForNotTrakedAsync(inventoryEntity.Id, false);
+                                }
 
-        //                    #endregion
+                                #endregion
+                            }
+                            else if (entity.TaskType == TaskType.移库)
+                            {
+                                #region 修改库存
 
-        //                    #region 在StackTask删除 TaskEntity
+                                GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
+                                {
+                                    LocationId = entity.OutLocationId
+                                };
+                                var inventoryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
+                                if (inventoryEntity != null)
+                                {
+                                    inventoryEntity.LocationId = (int)entity.InLocationId;
+                                    inventoryEntity.LocationCode = entity.InLocationCode;
+                                    await _inventoryApp.UpdateForTrackedAsync(inventoryEntity, false);
+                                }
 
-        //                    entity.IsDeleted = true;
-        //                    await UpdateForTrackedAsync(entity, false);
+                                #endregion
+                            }
 
-        //                    #endregion
+                            #endregion
 
 
-        //                    #region 修改库位状态
+                            #region 新增StockTaskHistory
 
-        //                    if (entity.TaskType == Entities.TaskType.入库)
-        //                    {
-        //                        var locationEntity = await _locationApp.GetByIdAsync((int)entity.InLocationId);
-        //                        locationEntity.LocationStatus = LocationStatus.已使用;
-        //                        _dBContext.Update<Location>(locationEntity);
-        //                    }
-        //                    else if (entity.TaskType == Entities.TaskType.出库 || entity.TaskType == Entities.TaskType.存车修正)
-        //                    {
-        //                        var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
-        //                        locationEntity.LocationStatus = LocationStatus.未使用;
-        //                        _dBContext.Update<Location>(locationEntity);
-        //                    }
-        //                    else if (entity.TaskType == Entities.TaskType.移库)
-        //                    {
-        //                        if (entity.Remark.Contains("出库"))
-        //                        {
-        //                            //由出库任务产生的移库任务  
-        //                            var locationEntity = await _locationApp.GetByIdAsync((int)entity.InLocationId);
-        //                            locationEntity.LocationStatus = LocationStatus.已使用;
-        //                            _dBContext.Update<Location>(locationEntity);
-        //                        }
-        //                        else if (entity.Remark.Contains("入库"))
-        //                        {
-        //                            //由入库任务产生的移库任务
-        //                            var b = entity.Remark.Contains("入库");
-        //                            if (b)
-        //                            {
-        //                                var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
-        //                                locationEntity.LocationStatus = LocationStatus.未使用;
-        //                                _dBContext.Update<Location>(locationEntity);
-        //                            }
-        //                        }
-        //                        else
-        //                        {
-        //                            var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
-        //                            locationEntity.LocationStatus = LocationStatus.未使用;
-        //                            _dBContext.Update<Location>(locationEntity);
+                            var historyEntity = new StockTaskHistory()
+                            {
+                                Code = entity.Code,
+                                WarehouseId = entity.WarehouseId,
+                                AreaId = entity.AreaId,
+                                AreaName = entity.AreaName,
+                                TaskType = entity.TaskType,
+                                IsRepair = entity.IsRepair,
+                                TaskStatus = entity.TaskStatus,
+                                Priority = entity.Priority,
+                                CarTypeNum = entity.CarTypeNum,
+                                CarTypeFace = entity.CarTypeFace,
+                                CarTypeId = entity.CarTypeId,
+                                CarTypeName = entity.CarTypeName,
+                                CarTypeInt = entity.CarTypeInt,
+                                CreateTime = entity.CreateTime,
+                                StartTime = entity.StartTime,
+                                CompleteTime = DateTime.Now,
+                                LocationType = entity.LocationType,
+                                GatewayId = entity.GatewayId,
+                                GatewayName = entity.GatewayName,
+                                EquipmentId = entity.EquipmentId,
+                                EquipmentName = entity.EquipmentName,
+                                TaskNo = entity.TaskNo,
+                                OutLocationId = entity.OutLocationId,
+                                OutLocationCode = entity.OutLocationCode,
+                                InLocationId = entity.InLocationId,
+                                InLocationCode = entity.InLocationCode,
+                                SetTaskType = setTaskType,
+                                WarnContent = entity.WarnContent,
+                                Remark = entity.Remark,
+                                RequestTaskTime = entity.RequestTaskTime,
+                                JXCarTypeNum = entity.JXCarTypeNum
+                            };
 
-        //                            var locationEntity2 = await _locationApp.GetByIdAsync((int)entity.InLocationId);
-        //                            locationEntity2.LocationStatus = LocationStatus.已使用;
-        //                            _dBContext.Update<Location>(locationEntity2);
-        //                        }
-        //                    }
+                            await _dBContext.AddAsync(historyEntity);
 
-        //                    #endregion
-        //                }
-        //                else if (status == Entities.TaskStatus.正在执行)
-        //                {
-        //                    entity.StartTime = DateTime.Now;
-        //                    if (setTaskType == 0)
-        //                    {
-        //                        entity.Remark += "手动开始任务。";
-        //                    }
+                            #endregion
 
-        //                    #region 修改TaskEntity
+                            #region 在StackTask删除 TaskEntity
 
-        //                    await Repository.UpdateAsync(entity, true);
+                            entity.IsDeleted = true;
+                            await UpdateForTrackedAsync(entity, false);
 
-        //                    #endregion
-        //                }
-        //                else if (status == Entities.TaskStatus.取消任务)
-        //                {
-        //                    if (setTaskType == 0)
-        //                    {
-        //                        entity.Remark += "手动取消任务。";
-        //                    }
-
-        //                    #region 将任务删除，状态为取消任务
-
-        //                    entity.IsDeleted = true;
-        //                    await Repository.UpdateAsync(entity, false);
-
-        //                    #endregion
-
-        //                    #region 新增StockTaskHistory
-
-        //                    var historyEntity = new StockTaskHistory()
-        //                    {
-        //                        Code = entity.Code,
-        //                        WarehouseId = entity.WarehouseId,
-        //                        AreaId = entity.AreaId,
-        //                        AreaName = entity.AreaName,
-        //                        TaskType = entity.TaskType,
-        //                        IsRepair = entity.IsRepair,
-        //                        TaskStatus = entity.TaskStatus,
-        //                        Priority = entity.Priority,
-        //                        CarTypeNum = entity.CarTypeNum,
-        //                        CarTypeFace = entity.CarTypeFace,
-        //                        CarTypeId = entity.CarTypeId,
-        //                        CarTypeName = entity.CarTypeName,
-        //                        CarTypeInt = entity.CarTypeInt,
-        //                        CreateTime = entity.CreateTime,
-        //                        StartTime = entity.StartTime,
-        //                        CompleteTime = entity.CompleteTime,
-        //                        LocationType = entity.LocationType,
-        //                        GatewayId = entity.GatewayId,
-        //                        GatewayName = entity.GatewayName,
-        //                        EquipmentId = entity.EquipmentId,
-        //                        EquipmentName = entity.EquipmentName,
-        //                        TaskNo = entity.TaskNo,
-        //                        OutLocationId = entity.OutLocationId,
-        //                        OutLocationCode = entity.OutLocationCode,
-        //                        InLocationId = entity.InLocationId,
-        //                        InLocationCode = entity.InLocationCode,
-        //                        SetTaskType = entity.SetTaskType,
-        //                        WarnContent = entity.WarnContent,
-        //                        Remark = entity.Remark,
-        //                        RequestTaskTime = entity.RequestTaskTime,
-        //                        JXCarTypeNum = entity.JXCarTypeNum
-        //                    };
-
-        //                    await _dBContext.AddAsync(historyEntity);
-
-        //                    #endregion
-
-        //                    //修改库位状态                           
-        //                    if (entity.TaskType == Entities.TaskType.入库)
-        //                    {
-        //                        var locationEntity = await _locationApp.GetByIdAsync((int)entity.InLocationId);
-        //                        locationEntity.LocationStatus = LocationStatus.未使用;
-        //                        _dBContext.Update<Location>(locationEntity);
-        //                    }
-        //                    else if (entity.TaskType == Entities.TaskType.出库 || entity.TaskType == Entities.TaskType.存车修正)
-        //                    {
-        //                        var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
-        //                        locationEntity.LocationStatus = LocationStatus.已使用;
-        //                        _dBContext.Update<Location>(locationEntity);
-
-        //                        //修改库存状态
-        //                        GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
-        //                        {
-        //                            CarTypeNum = entity.CarTypeNum
-        //                        };
-        //                        var inventryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
-        //                        inventryEntity.Status = 1;
-        //                        _dBContext.Update(inventryEntity);
-        //                    }
-        //                    else if (entity.TaskType == Entities.TaskType.移库)
-        //                    {
-        //                        //修改库存状态
-        //                        GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
-        //                        {
-        //                            CarTypeNum = entity.CarTypeNum
-        //                        };
-        //                        var inventryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
+                            #endregion
 
 
-        //                        var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
-        //                        if (inventryEntity.LocationId == entity.OutLocationId)
-        //                        {
-        //                            locationEntity.LocationStatus = LocationStatus.已使用;
-        //                        }
-        //                        else
-        //                        {
-        //                            locationEntity.LocationStatus = LocationStatus.未使用;
-        //                        }
+                            #region 修改库位状态
 
-        //                        _dBContext.Update<Location>(locationEntity);
+                            if (entity.TaskType == TaskType.入库)
+                            {
+                                var locationEntity = await _locationApp.GetByIdAsync((int)entity.InLocationId);
+                                locationEntity.LocationStatus = LocationStatus.已使用;
+                                _dBContext.Update<Location>(locationEntity);
+                            }
+                            else if (entity.TaskType == TaskType.出库 || entity.TaskType == TaskType.存车修正)
+                            {
+                                var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
+                                locationEntity.LocationStatus = LocationStatus.未使用;
+                                _dBContext.Update<Location>(locationEntity);
+                            }
+                            else if (entity.TaskType == TaskType.移库)
+                            {
+                                if (entity.Remark.Contains("出库"))
+                                {
+                                    //由出库任务产生的移库任务  
+                                    var locationEntity = await _locationApp.GetByIdAsync((int)entity.InLocationId);
+                                    locationEntity.LocationStatus = LocationStatus.已使用;
+                                    _dBContext.Update<Location>(locationEntity);
+                                }
+                                else if (entity.Remark.Contains("入库"))
+                                {
+                                    //由入库任务产生的移库任务
+                                    var b = entity.Remark.Contains("入库");
+                                    if (b)
+                                    {
+                                        var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
+                                        locationEntity.LocationStatus = LocationStatus.未使用;
+                                        _dBContext.Update<Location>(locationEntity);
+                                    }
+                                }
+                                else
+                                {
+                                    var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
+                                    locationEntity.LocationStatus = LocationStatus.未使用;
+                                    _dBContext.Update<Location>(locationEntity);
 
-        //                        var locationEntity2 = await _locationApp.GetByIdAsync((int)entity.InLocationId);
-        //                        locationEntity2.LocationStatus = LocationStatus.未使用;
-        //                        _dBContext.Update<Location>(locationEntity2);
+                                    var locationEntity2 = await _locationApp.GetByIdAsync((int)entity.InLocationId);
+                                    locationEntity2.LocationStatus = LocationStatus.已使用;
+                                    _dBContext.Update<Location>(locationEntity2);
+                                }
+                            }
 
-        //                        if (inventryEntity.Status != 1)
-        //                        {
-        //                            inventryEntity.Status = 1;
-        //                            _dBContext.Update(inventryEntity);
-        //                        }
-        //                    }
-        //                }
+                            #endregion
+                        }
+                        else if (status == TaskStatus.正在执行)
+                        {
+                            entity.StartTime = DateTime.Now;
+                            if (setTaskType == 0)
+                            {
+                                entity.Remark += "手动开始任务。";
+                            }
+
+                            #region 修改TaskEntity
+
+                            await Repository.UpdateAsync(entity, true);
+
+                            #endregion
+                        }
+                        else if (status == TaskStatus.取消任务)
+                        {
+                            if (setTaskType == 0)
+                            {
+                                entity.Remark += "手动取消任务。";
+                            }
+
+                            #region 将任务删除，状态为取消任务
+
+                            entity.IsDeleted = true;
+                            await Repository.UpdateAsync(entity, false);
+
+                            #endregion
+
+                            #region 新增StockTaskHistory
+
+                            var historyEntity = new StockTaskHistory()
+                            {
+                                Code = entity.Code,
+                                WarehouseId = entity.WarehouseId,
+                                AreaId = entity.AreaId,
+                                AreaName = entity.AreaName,
+                                TaskType = entity.TaskType,
+                                IsRepair = entity.IsRepair,
+                                TaskStatus = entity.TaskStatus,
+                                Priority = entity.Priority,
+                                CarTypeNum = entity.CarTypeNum,
+                                CarTypeFace = entity.CarTypeFace,
+                                CarTypeId = entity.CarTypeId,
+                                CarTypeName = entity.CarTypeName,
+                                CarTypeInt = entity.CarTypeInt,
+                                CreateTime = entity.CreateTime,
+                                StartTime = entity.StartTime,
+                                CompleteTime = entity.CompleteTime,
+                                LocationType = entity.LocationType,
+                                GatewayId = entity.GatewayId,
+                                GatewayName = entity.GatewayName,
+                                EquipmentId = entity.EquipmentId,
+                                EquipmentName = entity.EquipmentName,
+                                TaskNo = entity.TaskNo,
+                                OutLocationId = entity.OutLocationId,
+                                OutLocationCode = entity.OutLocationCode,
+                                InLocationId = entity.InLocationId,
+                                InLocationCode = entity.InLocationCode,
+                                SetTaskType = entity.SetTaskType,
+                                WarnContent = entity.WarnContent,
+                                Remark = entity.Remark,
+                                RequestTaskTime = entity.RequestTaskTime,
+                                JXCarTypeNum = entity.JXCarTypeNum
+                            };
+
+                            await _dBContext.AddAsync(historyEntity);
+
+                            #endregion
+
+                            //修改库位状态                           
+                            if (entity.TaskType == TaskType.入库)
+                            {
+                                var locationEntity = await _locationApp.GetByIdAsync((int)entity.InLocationId);
+                                locationEntity.LocationStatus = LocationStatus.未使用;
+                                _dBContext.Update<Location>(locationEntity);
+                            }
+                            else if (entity.TaskType == TaskType.出库 || entity.TaskType == TaskType.存车修正)
+                            {
+                                var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
+                                locationEntity.LocationStatus = LocationStatus.已使用;
+                                _dBContext.Update<Location>(locationEntity);
+
+                                //修改库存状态
+                                GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
+                                {
+                                    CarTypeNum = entity.CarTypeNum
+                                };
+                                var inventryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
+                                inventryEntity.Status = 1;
+                                _dBContext.Update(inventryEntity);
+                            }
+                            else if (entity.TaskType == TaskType.移库)
+                            {
+                                //修改库存状态
+                                GetInventoryListInput getInventoryListInput = new GetInventoryListInput()
+                                {
+                                    CarTypeNum = entity.CarTypeNum
+                                };
+                                var inventryEntity = await _inventoryApp.GetInventoryEntity(getInventoryListInput);
 
 
-        //                await Repository.SaveChangesAsync();
-        //                transaction.Commit();
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            var a = ex.Message;
-        //            transaction.Rollback();
-        //            return false;
-        //        }
-        //    }
-        //}
+                                var locationEntity = await _locationApp.GetByIdAsync((int)entity.OutLocationId);
+                                if (inventryEntity.LocationId == entity.OutLocationId)
+                                {
+                                    locationEntity.LocationStatus = LocationStatus.已使用;
+                                }
+                                else
+                                {
+                                    locationEntity.LocationStatus = LocationStatus.未使用;
+                                }
+
+                                _dBContext.Update<Location>(locationEntity);
+
+                                var locationEntity2 = await _locationApp.GetByIdAsync((int)entity.InLocationId);
+                                locationEntity2.LocationStatus = LocationStatus.未使用;
+                                _dBContext.Update<Location>(locationEntity2);
+
+                                if (inventryEntity.Status != 1)
+                                {
+                                    inventryEntity.Status = 1;
+                                    _dBContext.Update(inventryEntity);
+                                }
+                            }
+                        }
+
+
+                        await Repository.SaveChangesAsync();
+                        transaction.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var a = ex.Message;
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
 
         ///// <summary>
         ///// 任务已执行，取消任务，添加移库任务，将台车退回取货位置
         ///// </summary>
         ///// <param name="TaskEntity"></param>
         ///// <returns></returns>
-        //public async Task<bool> FinishedTaskAndAddMoveTask(StockTask TaskEntity)
-        //{
-        //    //取消当前任务，生成移库任务【库存不用修改】
-        //    using (var transaction = _dBContext.Database.BeginTransaction())
-        //    {
-        //        try
-        //        {
-        //            //注意：库存数据因为任务没有完成所以库存数据没有修改，库位的状态在移库任务完成之后恢复
+        public async Task<bool> FinishedTaskAndAddMoveTask(StockTask TaskEntity)
+        {
+            //取消当前任务，生成移库任务【库存不用修改】
+            using (var transaction = _dBContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    //注意：库存数据因为任务没有完成所以库存数据没有修改，库位的状态在移库任务完成之后恢复
 
-        //            #region 将任务删除，状态为取消任务
+                    #region 将任务删除，状态为取消任务
 
-        //            TaskEntity.TaskStatus = Entities.TaskStatus.取消任务;
-        //            TaskEntity.Remark += "任务已执行，需要退回，手动取消任务。";
-        //            TaskEntity.SetTaskType = 1;
-        //            TaskEntity.IsDeleted = true;
-        //            await Repository.UpdateAsync(TaskEntity, false);
+                    TaskEntity.TaskStatus = TaskStatus.取消任务;
+                    TaskEntity.Remark += "任务已执行，需要退回，手动取消任务。";
+                    TaskEntity.SetTaskType = 1;
+                    TaskEntity.IsDeleted = true;
+                    await Repository.UpdateAsync(TaskEntity, false);
 
-        //            #endregion
+                    #endregion
 
-        //            #region 新增StockTaskHistory
+                    #region 新增StockTaskHistory
 
-        //            var historyEntity = new StockTaskHistory()
-        //            {
-        //                Code = TaskEntity.Code,
-        //                WarehouseId = TaskEntity.WarehouseId,
-        //                AreaId = TaskEntity.AreaId,
-        //                AreaName = TaskEntity.AreaName,
-        //                TaskType = TaskEntity.TaskType,
-        //                IsRepair = TaskEntity.IsRepair,
-        //                TaskStatus = TaskEntity.TaskStatus,
-        //                Priority = TaskEntity.Priority,
-        //                CarTypeNum = TaskEntity.CarTypeNum,
-        //                CarTypeFace = TaskEntity.CarTypeFace,
-        //                CarTypeId = TaskEntity.CarTypeId,
-        //                CarTypeName = TaskEntity.CarTypeName,
-        //                CarTypeInt = TaskEntity.CarTypeInt,
-        //                CreateTime = TaskEntity.CreateTime,
-        //                StartTime = TaskEntity.StartTime,
-        //                CompleteTime = TaskEntity.CompleteTime,
-        //                LocationType = TaskEntity.LocationType,
-        //                GatewayId = TaskEntity.GatewayId,
-        //                GatewayName = TaskEntity.GatewayName,
-        //                EquipmentId = TaskEntity.EquipmentId,
-        //                EquipmentName = TaskEntity.EquipmentName,
-        //                TaskNo = TaskEntity.TaskNo,
-        //                OutLocationId = TaskEntity.OutLocationId,
-        //                OutLocationCode = TaskEntity.OutLocationCode,
-        //                InLocationId = TaskEntity.InLocationId,
-        //                InLocationCode = TaskEntity.InLocationCode,
-        //                SetTaskType = TaskEntity.SetTaskType,
-        //                WarnContent = TaskEntity.WarnContent,
-        //                Remark = TaskEntity.Remark,
-        //                RequestTaskTime = TaskEntity.RequestTaskTime
-        //            };
+                    var historyEntity = new StockTaskHistory()
+                    {
+                        Code = TaskEntity.Code,
+                        WarehouseId = TaskEntity.WarehouseId,
+                        AreaId = TaskEntity.AreaId,
+                        AreaName = TaskEntity.AreaName,
+                        TaskType = TaskEntity.TaskType,
+                        IsRepair = TaskEntity.IsRepair,
+                        TaskStatus = TaskEntity.TaskStatus,
+                        Priority = TaskEntity.Priority,
+                        CarTypeNum = TaskEntity.CarTypeNum,
+                        CarTypeFace = TaskEntity.CarTypeFace,
+                        CarTypeId = TaskEntity.CarTypeId,
+                        CarTypeName = TaskEntity.CarTypeName,
+                        CarTypeInt = TaskEntity.CarTypeInt,
+                        CreateTime = TaskEntity.CreateTime,
+                        StartTime = TaskEntity.StartTime,
+                        CompleteTime = TaskEntity.CompleteTime,
+                        LocationType = TaskEntity.LocationType,
+                        GatewayId = TaskEntity.GatewayId,
+                        GatewayName = TaskEntity.GatewayName,
+                        EquipmentId = TaskEntity.EquipmentId,
+                        EquipmentName = TaskEntity.EquipmentName,
+                        TaskNo = TaskEntity.TaskNo,
+                        OutLocationId = TaskEntity.OutLocationId,
+                        OutLocationCode = TaskEntity.OutLocationCode,
+                        InLocationId = TaskEntity.InLocationId,
+                        InLocationCode = TaskEntity.InLocationCode,
+                        SetTaskType = TaskEntity.SetTaskType,
+                        WarnContent = TaskEntity.WarnContent,
+                        Remark = TaskEntity.Remark,
+                        RequestTaskTime = TaskEntity.RequestTaskTime
+                    };
 
-        //            await _dBContext.AddAsync(historyEntity);
+                    await _dBContext.AddAsync(historyEntity);
 
-        //            #endregion
+                    #endregion
 
-        //            #region 添加移库任务
+                    #region 添加移库任务
 
-        //            StockTask entity = new StockTask();
-        //            entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-        //            entity.WarehouseId = _appConfiguration.Value.WarehouseId;
-        //            entity.AreaId = TaskEntity.AreaId;
-        //            entity.AreaName = TaskEntity.AreaName;
-        //            entity.TaskType = TaskType.移库;
-        //            entity.Remark = "由" + TaskEntity.TaskType.ToString() + "任务号：" + TaskEntity.TaskNo + "退回产生的移库任务。";
-        //            entity.TaskStatus = Entities.TaskStatus.等待执行;
-        //            entity.Priority = TaskPriority.普通;
-        //            entity.CarTypeNum = TaskEntity.CarTypeNum;
-        //            entity.CarTypeFace = TaskEntity.CarTypeFace;
-        //            entity.CarTypeId = TaskEntity.Id;
-        //            entity.CarTypeName = TaskEntity.CarTypeName;
-        //            entity.CreateTime = DateTime.Now;
-        //            entity.SetTaskType = 0;
+                    StockTask entity = new StockTask();
+                    entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+                    entity.WarehouseId = _appConfiguration.Value.WarehouseId;
+                    entity.AreaId = TaskEntity.AreaId;
+                    entity.AreaName = TaskEntity.AreaName;
+                    entity.TaskType = TaskType.移库;
+                    entity.Remark = "由" + TaskEntity.TaskType.ToString() + "任务号：" + TaskEntity.TaskNo + "退回产生的移库任务。";
+                    entity.TaskStatus = TaskStatus.等待执行;
+                    entity.Priority = TaskPriority.普通;
+                    entity.CarTypeNum = TaskEntity.CarTypeNum;
+                    entity.CarTypeFace = TaskEntity.CarTypeFace;
+                    entity.CarTypeId = TaskEntity.Id;
+                    entity.CarTypeName = TaskEntity.CarTypeName;
+                    entity.CreateTime = DateTime.Now;
+                    entity.SetTaskType = 0;
 
-        //            entity.EquipmentId = TaskEntity.EquipmentId;
-        //            entity.EquipmentName = TaskEntity.EquipmentName;
-        //            entity.TaskNo = await _tempCodeApp.GetNewCode();
-        //            if (TaskEntity.TaskType == TaskType.入库)
-        //            {
-        //                entity.OutLocationId = TaskEntity.InLocationId;
-        //                entity.OutLocationCode = TaskEntity.InLocationCode;
-        //                var gateWayEntity = await _gatewayApp.GetByIdAsNoTrackingAsync((int)TaskEntity.GatewayId);
-        //                entity.InLocationId = gateWayEntity.LocationId;
-        //                entity.InLocationCode = gateWayEntity.LocationCode;
-        //                entity.LocationType = TaskEntity.LocationType;
-        //            }
-        //            else if (TaskEntity.TaskType == TaskType.出库)
-        //            {
-        //                var gateWayEntity = await _gatewayApp.GetByIdAsNoTrackingAsync((int)TaskEntity.GatewayId);
-        //                entity.OutLocationCode = gateWayEntity.LocationCode;
-        //                entity.OutLocationId = gateWayEntity.LocationId;
+                    entity.EquipmentId = TaskEntity.EquipmentId;
+                    entity.EquipmentName = TaskEntity.EquipmentName;
+                    entity.TaskNo = await _tempCodeApp.GetNewCode();
+                    if (TaskEntity.TaskType == TaskType.入库)
+                    {
+                        entity.OutLocationId = TaskEntity.InLocationId;
+                        entity.OutLocationCode = TaskEntity.InLocationCode;
+                        var gateWayEntity = await _gatewayApp.GetByIdAsNoTrackingAsync((int)TaskEntity.GatewayId);
+                        entity.InLocationId = gateWayEntity.LocationId;
+                        entity.InLocationCode = gateWayEntity.LocationCode;
+                        entity.LocationType = TaskEntity.LocationType;
+                    }
+                    else if (TaskEntity.TaskType == TaskType.出库)
+                    {
+                        var gateWayEntity = await _gatewayApp.GetByIdAsNoTrackingAsync((int)TaskEntity.GatewayId);
+                        entity.OutLocationCode = gateWayEntity.LocationCode;
+                        entity.OutLocationId = gateWayEntity.LocationId;
 
-        //                entity.InLocationId = TaskEntity.OutLocationId;
-        //                entity.InLocationCode = TaskEntity.OutLocationCode;
-        //                entity.LocationType = TaskEntity.LocationType;
-        //            }
+                        entity.InLocationId = TaskEntity.OutLocationId;
+                        entity.InLocationCode = TaskEntity.OutLocationCode;
+                        entity.LocationType = TaskEntity.LocationType;
+                    }
 
-        //            var res = await Repository.AddAsync(entity, false);
+                    var res = await Repository.AddAsync(entity, false);
 
-        //            #endregion
+                    #endregion
 
-        //            await Repository.SaveChangesAsync();
-        //            transaction.Commit();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            var a = ex.Message;
-        //            transaction.Rollback();
-        //            return false;
-        //        }
-        //    }
-        //}
+                    await Repository.SaveChangesAsync();
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    var a = ex.Message;
+                    transaction.Rollback();
+                    return false;
+                }
+            }
+        }
 
 
         #endregion
@@ -1736,54 +1820,54 @@ namespace ChangSha_Byd_NetCore8.App.Production
         /// <param name="CarTypeNum"></param>
         /// <param name="GateID"></param>
         /// <returns></returns>
-        //public async Task<string> ShouDongRukuRfid(string InputCarTypeNum, int GatewayID)
-        //{
-        //    var Rfid = "0";
-        //    //通过出入口ID判断是主线还是UB(手动入库的话,只有入口)
-        //    if (GatewayID == 1 || GatewayID == 2 || GatewayID == 3)
-        //    {
-        //        //这是UB区域
-        //        if (InputCarTypeNum.Length == 4)
-        //        {
-        //            var rfidBef = InputCarTypeNum.Substring(0, 1);
-        //            var rfidAft = InputCarTypeNum.Substring(1, 3);
-        //            var r1 = int.Parse(rfidBef);
-        //            var r2 = int.Parse(rfidAft);
-        //            var B1 = Convert.ToString(r1, 2).PadLeft(8, '0');
-        //            var B2 = Convert.ToString(r2, 2).PadLeft(8, '0');
-        //            string res = B1 + B2;
-        //            Rfid = Convert.ToInt32(res, 2).ToString();
-        //        }
-        //        else
-        //        {
-        //            //五位数才是正常的UB台车RFID
-        //            var rfidBef = InputCarTypeNum.Substring(0, 2);
-        //            var rfidAft = InputCarTypeNum.Substring(2, 3);
-        //            var r1 = int.Parse(rfidBef);
-        //            var r2 = int.Parse(rfidAft);
-        //            var B1 = Convert.ToString(r1, 2).PadLeft(8, '0');
-        //            var B2 = Convert.ToString(r2, 2).PadLeft(8, '0');
-        //            string res = B1 + B2;
-        //            Rfid = Convert.ToInt32(res, 2).ToString();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //主线区域
-        //        if (InputCarTypeNum.Length == 4)
-        //        {
-        //            var rfidBef = InputCarTypeNum.Substring(0, 1);
-        //            var rfidAft = InputCarTypeNum.Substring(1, 3);
-        //            var r1 = int.Parse(rfidBef);
-        //            var r2 = int.Parse(rfidAft);
-        //            var B1 = Convert.ToString(r1, 2).PadLeft(8, '0');
-        //            var B2 = Convert.ToString(r2, 2).PadLeft(8, '0');
-        //            string res = B1 + B2;
-        //            Rfid = Convert.ToInt32(res, 2).ToString();
-        //        }
-        //    }
+        public async Task<string> ShouDongRukuRfid(string InputCarTypeNum, int GatewayID)
+        {
+            var Rfid = "0";
+            //通过出入口ID判断是主线还是UB(手动入库的话,只有入口)
+            if (GatewayID == 1 || GatewayID == 2 || GatewayID == 3)
+            {
+                //这是UB区域
+                if (InputCarTypeNum.Length == 4)
+                {
+                    var rfidBef = InputCarTypeNum.Substring(0, 1);
+                    var rfidAft = InputCarTypeNum.Substring(1, 3);
+                    var r1 = int.Parse(rfidBef);
+                    var r2 = int.Parse(rfidAft);
+                    var B1 = Convert.ToString(r1, 2).PadLeft(8, '0');
+                    var B2 = Convert.ToString(r2, 2).PadLeft(8, '0');
+                    string res = B1 + B2;
+                    Rfid = Convert.ToInt32(res, 2).ToString();
+                }
+                else
+                {
+                    //五位数才是正常的UB台车RFID
+                    var rfidBef = InputCarTypeNum.Substring(0, 2);
+                    var rfidAft = InputCarTypeNum.Substring(2, 3);
+                    var r1 = int.Parse(rfidBef);
+                    var r2 = int.Parse(rfidAft);
+                    var B1 = Convert.ToString(r1, 2).PadLeft(8, '0');
+                    var B2 = Convert.ToString(r2, 2).PadLeft(8, '0');
+                    string res = B1 + B2;
+                    Rfid = Convert.ToInt32(res, 2).ToString();
+                }
+            }
+            else
+            {
+                //主线区域
+                if (InputCarTypeNum.Length == 4)
+                {
+                    var rfidBef = InputCarTypeNum.Substring(0, 1);
+                    var rfidAft = InputCarTypeNum.Substring(1, 3);
+                    var r1 = int.Parse(rfidBef);
+                    var r2 = int.Parse(rfidAft);
+                    var B1 = Convert.ToString(r1, 2).PadLeft(8, '0');
+                    var B2 = Convert.ToString(r2, 2).PadLeft(8, '0');
+                    string res = B1 + B2;
+                    Rfid = Convert.ToInt32(res, 2).ToString();
+                }
+            }
 
-        //    return Rfid.ToString();
-        //}
+            return Rfid.ToString();
+        }
     }
 }

@@ -46,6 +46,9 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
         [Description("是否是维修")]
         public bool IsRepair { get; set; } = false;
 
-       
+        public static implicit operator Area_CarType_GateWay(List<Area_CarType_GateWay> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

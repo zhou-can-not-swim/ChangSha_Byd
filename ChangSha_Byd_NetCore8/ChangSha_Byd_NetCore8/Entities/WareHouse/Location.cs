@@ -21,9 +21,9 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
         /// 库位号  排-列-层
         /// </summary>
         [Description("库位号  排-列-层")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
        
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
         [Description("仓库id")]
         public int? WarehouseId { get; set; }
 
-        public Warehouse Warehouse { get; set; }
+        public Warehouse? Warehouse { get; set; }
 
         /// <summary>
         /// 库区id
@@ -40,7 +40,7 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
         [Description("库区id")]
         public int AreaId { get; set; }
 
-        public Area Area { get; set; }
+        public Area? Area { get; set; }
               /// <summary>
         /// 库位长度
         /// </summary>

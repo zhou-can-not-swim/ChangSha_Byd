@@ -29,12 +29,12 @@
             </div>
 
             <div class="ssdiv">
-                <div v-if="context?.mstInfo?.sendTaskReq" class="GreenBall tc"> </div>
+                <div v-if="context?.mstInfo?.SendTaskReq" class="GreenBall tc"> </div>
                 <div v-else class="GreyBall tc"> </div>
                 <div class="sstext">下发任务请求</div>
             </div>
             <div class="ssdiv">
-                <div v-if="context?.plcInfo?.sendTaskAck" class="GreenBall tc">
+                <div v-if="context?.plcInfo?.SendTaskAck" class="GreenBall tc">
                 </div>
                 <div v-else class="GreyBall tc"> </div>
                 <div class="sstext">下发任务确认
@@ -62,15 +62,15 @@
 
         <div class="ssdivText">
             <div class="sstext">状态: </div><span class="sstext sstext_color" v-if="context != null">
-                {{storkerStatusOptions.find(u => u.key ==context.plcInfo.StorkerStatus)?.display_name}}
+                {{storkerStatusOptions.find(u => u.key == context?.plcInfo?.StorkerStatus)?.display_name}}
 
             </span>
         </div>
-   
+
         <div class="ssdivText">
             <div class="sstext">行程: </div><span class="sstext sstext_color" v-if="context != null">
                 {{stockerTripOptions.find(u => u.key ==
-                    context.plcInfo.StockerTrip)?.display_name}}
+                    context?.plcInfo?.StockerTrip)?.display_name}}
 
             </span>
         </div>
@@ -93,7 +93,8 @@
 
         <div class="ssdivText">
             <div class="sstext">当前排列层: </div><span class="sstext sstext_color" v-if="context != null">
-                {{ context?.plcInfo?.CurrentFloor + '-' + context?.plcInfo?.CurrentLine + '-' + context?.plcInfo?.CurrentColumn }}
+                {{ context?.plcInfo?.CurrentFloor + '-' + context?.plcInfo?.CurrentLine + '-' +
+                    context?.plcInfo?.CurrentColumn }}
             </span>
         </div>
 
@@ -175,7 +176,8 @@
 
         <div class="ssdivText">
             <div class="sstext">下发取货排列层: </div><span class="sstext sstext_color" v-if="context != null">
-                {{ context?.mstInfo?.StartLine + '-' + context?.mstInfo?.StartColumn + '-' + context?.mstInfo?.StartFloor }}
+                {{ context?.mstInfo?.StartLine + '-' + context?.mstInfo?.StartColumn + '-' +
+                    context?.mstInfo?.StartFloor }}
             </span>
         </div>
         <div class="ssdivText">
@@ -198,96 +200,98 @@
 
     <div class="text" type="flex" style="height: 1.5rem;margin-left: 300px;">
 
-			<div class="sstitle" style="font-weight: bold;">机 舱 区 域
-			</div>
+        <div class="sstitle" style="font-weight: bold;">机 舱 区 域
+        </div>
 
-		</div>
-		<div class="text" type="flex" style="height: 1.5rem">
+    </div>
 
-			<div class="ssdivText" style="font-weight: bold;">
-				<div class="sstext">EC010_A库口</div>
-			</div>
-			<div class="ssdiv">
-				<div v-if="context != null && context?.plcInfo?.EC010_A库口?.StandByReq" class="GreenBall tc">
-				</div>
-				<div v-else class="GreyBall tc"> </div>
-				<div class="sstext">入库就位请求
-				</div>
-			</div>
-			<div class="ssdiv">
-				<div v-if="context != null && context?.mstInfo?.EC010_A库口?.StandByAck" class="GreenBall tc"> </div>
-				<div v-else class="GreyBall tc"> </div>
-				<div class="sstext">入库就位确认</div>
-			</div>
-			<div class="ssdiv">
-				<div v-if="context != null && context?.plcInfo?.EC010_A库口?.OutStatus" class="GreenBall tc">
-				</div>
-				<div v-else class="GreyBall tc"> </div>
-				<div class="sstext">允许出库
-				</div>
-			</div>
+    <!-- EC010_A库口 -->
+<div class="text" type="flex" style="height: 1.5rem">
+    <div class="ssdivText" style="font-weight: bold;">
+        <div class="sstext">EC010_A库口</div>
+    </div>
+    <div class="ssdiv">
+        <div v-if="context != null && context?.plcInfo?.Gateways?.EC010_A库口?.StandByReq" class="GreenBall tc"></div>
+        <div v-else class="GreyBall tc"></div>
+        <div class="sstext">入库就位请求</div>
+    </div>
+    <div class="ssdiv">
+        <div v-if="context != null && context?.mstInfo?.Gateways?.EC010_A库口?.StandByAck" class="GreenBall tc"></div>
+        <div v-else class="GreyBall tc"></div>
+        <div class="sstext">入库就位确认</div>
+    </div>
+    <div class="ssdiv">
+        <div v-if="context != null && context?.plcInfo?.Gateways?.EC010_A库口?.OutStatus" class="GreenBall tc"></div>
+        <div v-else class="GreyBall tc"></div>
+        <div class="sstext">允许出库</div>
+    </div>
 
-			<div class="ssdivText">
-				<div class="sstext">入库来料RFID: </div><span class="sstext sstext_color" v-if="context!=null">
-					{{ context?.plcInfo?.EC010_A库口?.EntryRFID }}
-				</span>
-			</div>
-			<div class="ssdivText">
-				<div class="sstext">请求出库RFID: </div><span class="sstext sstext_color" v-if="context!=null">
-					{{context?.mstInfo?.EC010_A库口?.RequestTaskRFID}}
-				</span>
-			</div>
-			<div class="ssdiv">
-				<div class="sstext">出库校验结果: </div><span class="sstext sstext_color" v-if="context!=null">
-					{{requestTaskResultOptions.find(u =>u.key ==
-					context?.plcInfo?.EC010_A库口?.RequestTaskResult)?.display_name}}
+    <div class="ssdivText">
+        <div class="sstext">入库来料RFID:</div>
+        <span class="sstext sstext_color" v-if="context != null">
+            {{ context?.plcInfo?.Gateways?.EC010_A库口?.EntryRFID }}
+        </span>
+    </div>
+    <div class="ssdivText">
+        <div class="sstext">请求出库RFID:</div>
+        <span class="sstext sstext_color" v-if="context != null">
+            {{ context?.mstInfo?.Gateways?.EC010_A库口?.RequestTaskRFID }}
+        </span>
+    </div>
+    <div class="ssdiv">
+        <div class="sstext">出库校验结果:</div>
+        <span class="sstext sstext_color" v-if="context != null">
+            {{requestTaskResultOptions.find(u => u.key ==
+                context?.plcInfo?.Gateways?.EC010_A库口?.RequestTaskResult)?.display_name}}
+        </span>
+    </div>
+</div>
+<!-- EC010_B库口 -->
+<div class="text" type="flex" style="height: 1.5rem">
+    <div class="ssdivText" style="font-weight: bold;">
+        <div class="sstext">EC010_B库口</div>
+    </div>
+    <div class="ssdiv">
+        <div v-if="context?.plcInfo?.Gateways?.EC010_B库口?.StandByReq" class="GreenBall tc"></div>
+        <div v-else class="GreyBall tc"></div>
+        <div class="sstext">入库就位请求</div>
+    </div>
+    <div class="ssdiv">
+        <div v-if="context?.mstInfo?.Gateways?.EC010_B库口?.StandByAck" class="GreenBall tc"></div>
+        <div v-else class="GreyBall tc"></div>
+        <div class="sstext">入库就位确认</div>
+    </div>
+    <div class="ssdiv">
+        <div v-if="context?.plcInfo?.Gateways?.EC010_B库口?.OutStatus" class="GreenBall tc"></div>
+        <div v-else class="GreyBall tc"></div>
+        <div class="sstext">允许出库</div>
+    </div>
 
-				</span>
-			</div>
-		</div>
-		<!-- <div class="text" type="flex" style="height: 1.5rem">
+    <div class="ssdivText">
+        <div class="sstext">入库来料RFID:</div>
+        <span class="sstext sstext_color" v-if="context">
+            {{ context.plcInfo?.Gateways?.EC010_B库口?.EntryRFID }}
+        </span>
+    </div>
+    <div class="ssdivText">
+        <div class="sstext">请求出库RFID:</div>
+        <span class="sstext sstext_color" v-if="context!=null">
+            {{ context?.mstInfo?.Gateways?.EC010_B库口?.RequestTaskRFID }}
+        </span>
+    </div>
+    <div class="ssdiv">
+        <div class="sstext">出库校验结果:</div>
+        <span class="sstext sstext_color" v-if="context">
+            {{
+                requestTaskResultOptions.find(
+                    u => u.key === context.plcInfo?.Gateways?.EC010_B库口?.RequestTaskResult
+                )?.display_name
+            }}
+        </span>
+    </div>
+</div>
 
-			<div class="ssdivText" style="font-weight: bold;">
-				<div class="sstext">EC010_B库口</div>
-			</div>
-			<div class="ssdiv">
-				<div v-if="context!=null&&context.plcInfo.eC010_B库口.standByReq" class="GreenBall tc">
-				</div>
-				<div v-else class="GreyBall tc"> </div>
-				<div class="sstext">入库就位请求
-				</div>
-			</div>
-			<div class="ssdiv">
-				<div v-if="context!=null&&context.mstInfo.eC010_B库口.standByAck" class="GreenBall tc"> </div>
-				<div v-else class="GreyBall tc"> </div>
-				<div class="sstext">入库就位确认</div>
-			</div>
-			<div class="ssdiv">
-				<div v-if="context!=null&&context.plcInfo.eC010_B库口.outStatus" class="GreenBall tc">
-				</div>
-				<div v-else class="GreyBall tc"> </div>
-				<div class="sstext">允许出库
-				</div>
-			</div>
 
-			<div class="ssdivText">
-				<div class="sstext">入库来料RFID: </div><span class="sstext sstext_color" v-if="context!=null">
-					{{context.plcInfo.eC010_B库口.entryRFID}}
-				</span>
-			</div>
-			<div class="ssdivText">
-				<div class="sstext">请求出库RFID: </div><span class="sstext sstext_color" v-if="context!=null">
-					{{context.mstInfo.eC010_B库口.requestTaskRFID}}
-				</span>
-			</div>
-			<div class="ssdiv">
-				<div class="sstext">出库校验结果: </div><span class="sstext sstext_color" v-if="context!=null">
-					{{requestTaskResultOptions.find(u =>u.key ==
-					context.plcInfo.eC010_B库口.requestTaskResult).display_name}}
-
-				</span>
-			</div>
-		</div> -->
 
 </template>
 

@@ -37,7 +37,6 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
                     context.Pending.Core.VerificationCode = 0;
                 }
 
-                //后面4个默认为false 取反为true,不需要判断
                 //plc设备的三种状态
                 if (context.PlcInfo.StorkerStatus == StockerStatus.联机 &&
                     context.PlcInfo.StockerTrip == StockerTrip.待机 &&
@@ -66,6 +65,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
                         context.Pending.Core.EndLine = (ushort)response.EndLine;
                         context.Pending.Core.EndFloor = (ushort)response.EndFloor;
                         context.Pending.Core.EndColumn = (ushort)response.EndColumn;
+
                         context.Pending.Core.VerificationCode = response.VerificationCode;
                         context.Pending.Core.TaskRFID = short.Parse(response.TaskRFID);
                         if (response.TaskType == PLCTaskType.出库作业)
@@ -79,43 +79,41 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
                     }
                 }
 
+                //上位机下发任务请求 下位机发送任务请求确认 
+                if (context.MstMsg.GeneralCmdWord.HasFlag(MstFlags_GeneralCmdWord.下发任务请求) &&
+                    context.PlcInfo.SendTaskAck
+                )
+                {
+                    MstFlagsGeneralBuilder builder = new MstFlagsGeneralBuilder(context.Pending.GeneralCmdWord);
+                    context.Pending.GeneralCmdWord = builder.下发任务请求(false).Build();//立刻将下位机发送任务请求确认 的灯取消
+                }
+
+                //plc给完成任务请求的时候，上位机同时也要确认  --> 清除RFID
+                if (context.PlcInfo.FinishTaskReq && context.MstInfo.FinishTaskAck)
+                {
+                    #region  清除上位机下发信号
+                    context.Pending.Core.TaskNo = 0;
+                    context.Pending.Core.TaskType = 0;
+                    context.Pending.Core.StartLine = 0;
+                    context.Pending.Core.StartFloor = 0;
+                    context.Pending.Core.StartColumn = 0;
+                    context.Pending.Core.EndLine = 0;
+                    context.Pending.Core.EndFloor = 0;
+                    context.Pending.Core.EndColumn = 0;
+                    context.Pending.Core.VerificationCode = 0;
+                    context.Pending.Core.TaskRFID = 0;
+                    #endregion
+
+                    context.Pending.GateWay.EC010_A库口.请求出库RFID = 0;
+                    context.Pending.GateWay.EC010_B库口.请求出库RFID = 0;
+                }
 
 
 
-                ////上位机下发任务请求 下位机发送任务请求确认 
-                //if (context.MstMsg.GeneralCmdWord.HasFlag(MstFlags_GeneralCmdWord.下发任务请求) &&
-                //    context.PlcInfo.SendTaskAck
-                //)
-                //{
-                //    MstFlagsGeneralBuilder builder = new MstFlagsGeneralBuilder(context.Pending.GeneralCmdWord);
-                //    context.Pending.GeneralCmdWord = builder.下发任务请求(false).Build();//立刻将下位机发送任务请求确认 的灯取消
-
-                //}
-
-                ////plc给完成任务请求的时候，上位机同时也要确认  --> 清除RFID
-                //if (context.PlcInfo.FinishTaskReq && context.MstInfo.FinishTaskAck)
-                //{
-                //    #region  清除上位机下发信号
-                //    context.Pending.Core.TaskNo = 0;
-                //    context.Pending.Core.TaskType = 0;
-                //    context.Pending.Core.StartLine = 0;
-                //    context.Pending.Core.StartFloor = 0;
-                //    context.Pending.Core.StartColumn = 0;
-                //    context.Pending.Core.EndLine = 0;
-                //    context.Pending.Core.EndFloor = 0;
-                //    context.Pending.Core.EndColumn = 0;
-                //    context.Pending.Core.VerificationCode = 0;
-                //    context.Pending.Core.TaskRFID = 0;
-                //    #endregion
-
-                //    context.Pending.GateWay.EC010_A库口.请求出库RFID = 0;
-                //    context.Pending.GateWay.EC010_B库口.请求出库RFID = 0;
-
-
-                //}
-
-
-
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("SendTaskMiddleware异常："+e);
             }
             finally
             {
@@ -129,7 +127,7 @@ namespace ChangSha_Byd_NetCore8.Protocols.QHStocker.Middlewares
         {
             //找到对应的工位出口，写入对应的RFID，也就是CarTypeNum,和rfid是一个值
             if (outLocation == QH_OutLocation.EC010_A工位出口) context.Pending.GateWay.EC010_A库口.请求出库RFID = short.Parse(TaskRFID);
-            if (outLocation == QH_OutLocation.EC010_B工位出口) context.Pending.GateWay.EC010_B库口.请求出库RFID = short.Parse(TaskRFID);
+            if (outLocation == QH_OutLocation.EC010_B工位出口) context.Pending.GateWay.EC010_B库口.请求出库RFID = short.Parse(TaskRFID);//请求出库RFID 页面上的
 
             return context;
         }

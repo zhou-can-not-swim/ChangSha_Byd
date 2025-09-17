@@ -80,9 +80,9 @@ namespace ChangSha_Byd_NetCore8.Entities
         [Description("车型编号/风车类型")]
         public string CarTypeInt { get; set; }
 
-        public DateTime CreateTime { get; set; }
-        public DateTime? StartTime { get; set; }
-        public DateTime? CompleteTime { get; set; }
+        public DateTime CreateTime { get; set; }= DateTime.Now;
+        public DateTime? StartTime { get; set; } = DateTime.Now;
+        public DateTime? CompleteTime { get; set; }= DateTime.Now;
         /// <summary>
         /// 库位类型
         /// </summary>
@@ -136,12 +136,12 @@ namespace ChangSha_Byd_NetCore8.Entities
         /// </summary>
         [Description("完成方式")]
         public int SetTaskType { get; set; } = 1;
-  
+
         /// <summary>
         /// 报警内容
         /// </summary>
         [Description("报警内容")]
-        public string WarnContent { get; set; }
+        public string? WarnContent { get; set; } = "";
         /// <summary>
         /// 分拼请求校验RFID时间
         /// </summary>
