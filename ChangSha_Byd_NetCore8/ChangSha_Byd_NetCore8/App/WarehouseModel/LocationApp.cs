@@ -649,10 +649,8 @@ namespace ChangSha_Byd_NetCore8.App.WarehouseModel
             return result;
         }
 
-        internal async Task UpdateRangeForTrackedAsync(List<Location> updateList, bool v)
-        {
-            throw new NotImplementedException();
-        }
+
+
     }
 
 

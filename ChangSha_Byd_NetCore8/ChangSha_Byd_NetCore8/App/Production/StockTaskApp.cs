@@ -670,7 +670,7 @@ namespace ChangSha_Byd_NetCore8.App.Production
                     {
                         //检测任务是否已存在
                         var isHaveTask = await this.IsHaveStockTask(item.CarTypeNum, TaskType.出库);
-                        if (isHaveTask.Result)
+                        if (!isHaveTask.Result)//没找到
                         {
                             //判断库位状态是不是被禁用，如果禁用了则不出库
                             var locationEntity = locationList.Where(a => a.Id == item.LocationId).FirstOrDefault();
@@ -680,6 +680,7 @@ namespace ChangSha_Byd_NetCore8.App.Production
                             {
                                 if (!locationEntity.IsDisabled && !locationEntity.IsDeleted)
                                 {
+                                    //添加任务
                                     StockTask entity = new StockTask();
                                     entity.Code = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                                     entity.WarehouseId = _appConfiguration.Value.WarehouseId;
@@ -700,11 +701,12 @@ namespace ChangSha_Byd_NetCore8.App.Production
 
                                     var area_CarType_GateWayEntity = area_CarType_GateWayList.Where(a => a.AreaId == item.AreaId && a.CarTypeId == item.CarTypeId).FirstOrDefault();
 
+                                    //车型匹配的入口号和出口号
                                     entity.GatewayId = area_CarType_GateWayEntity.OutGatewayId;
                                     entity.GatewayName = area_CarType_GateWayEntity.OutGateway.Name;
                                     entity.SetTaskType = 0;
 
-
+                                    //分配的库位id
                                     entity.EquipmentId = locationEntity.EquipmentId;
                                     entity.EquipmentName = locationEntity.Equipment.Name;
                                     entity.TaskNo = await _tempCodeApp.GetNewCode();

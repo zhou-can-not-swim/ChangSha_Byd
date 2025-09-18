@@ -22,16 +22,16 @@ namespace Byd.Services.Request
 
     public class GetInventoryListInput
     {
-        public string Key { get; set; }
-        public List<int> Ids { get; set; }
+        public string? Key { get; set; } = "";
+        public List<int>? Ids { get; set; } = [];
         public int? WarehouseId { get; set; }
         public int? AreaId { get; set; }
         public int? NotAreaId { get; set; }
         public int? LocationId { get; set; }
 
         public int? CarTypeId { get; set; }
-        public string CarTypeNum { get; set; }
-        public string CarTypeInt { get; set; }
+        public string? CarTypeNum { get; set; } = "";
+        public string? CarTypeInt { get; set; }
         public int? CarTypeFace { get; set; }
         public int? InGatewayId { get; set; }
         public int? OutGatewayId { get; set; }
