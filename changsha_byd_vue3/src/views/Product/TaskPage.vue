@@ -187,7 +187,10 @@ const UpdateTaskStatus = () => {
 		taskStatus: seltaskStatus.value
 
 	}
+	console.log("updateTaskStatus--->",param);
 	stockTasks.updateTaskStatus(param).then(response => {
+		
+		
 		getTaskList()
 		multipleSelection.value = []
 		// $notify({
