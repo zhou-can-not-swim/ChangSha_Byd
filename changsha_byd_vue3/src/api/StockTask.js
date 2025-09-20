@@ -39,7 +39,7 @@ export function finishedTaskAndAddMoveTask(data){
 
 export function addInStockTask(data) {
   return request({
-    url: '/wms/stockTask/addInStockTask',
+    url: '/wms/StockTask/AddInStockTask',
     method: 'post',
     data
   })
