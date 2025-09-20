@@ -20,7 +20,7 @@ namespace Byd.Services.Request
     }
     public class GetGateWayListInput
     {
-        public string key { get; set; }
+        public string? key { get; set; }
         public int? WarehouseId { get; set; }
         public int? AreaId { get; set; }
         public int? Type { get; set; }

@@ -98,7 +98,7 @@ namespace Byd.Services.Request
 
         public int? CarTypeId { get; set; }
 
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
         public bool IsRepair { get; set; }
 
         public string RFIDTen { get; set; } = "";//夹具库新增十进制RFID

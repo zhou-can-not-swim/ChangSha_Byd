@@ -103,7 +103,7 @@ namespace Byd.WebApi.Controllers
                 }
                 //检测任务是否已存在
                 var isHaveTask = await _stockTaskApp.IsHaveStockTask(input.CarTypeNum, TaskType.入库);
-                if (isHaveTask.Result)
+                if (!isHaveTask.Result)
                 {
                     //1.判断台车编号_车型类型_出入口号是不是符合规则
                     //1.1 如果台车编号不为空，查出对应的车型

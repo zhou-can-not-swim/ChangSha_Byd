@@ -5,7 +5,7 @@
         public int page { get; set; }
         public int limit { get; set; }
 
-        public string key { get; set; }
+        public string? key { get; set; } = "";
 
         public PageReq()
         {

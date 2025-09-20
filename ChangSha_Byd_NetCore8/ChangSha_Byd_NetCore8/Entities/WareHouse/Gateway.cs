@@ -12,9 +12,9 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
     [Table("Gateway")]
     public class Gateway : FutureBaseEntity<int>
     {
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
         [Description("仓库id")]
         public int? WarehouseId { get; set; }
 
-        public Warehouse Warehouse { get; set; }
+        public Warehouse? Warehouse { get; set; }
 
 
         /// <summary>
@@ -39,13 +39,13 @@ namespace ChangSha_Byd_NetCore8.Entities.WareHouse
         [Description("所属堆垛机id")]
         public int EquipmentId { get; set; }
 
-        public Equipment Equipment { get; set; }
+        public Equipment? Equipment { get; set; }
 
         public int LocationId { get; set; }
 
         /// <summary>
         /// 库位，库口放货取货的库位编号
         /// </summary>
-        public string LocationCode { get; set; }
+        public string? LocationCode { get; set; }
     }
 }

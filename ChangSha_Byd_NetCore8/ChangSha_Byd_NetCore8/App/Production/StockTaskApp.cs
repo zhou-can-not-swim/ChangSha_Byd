@@ -15,7 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using TaskStatus = ChangSha_Byd_NetCore8.Protocols.Common.TaskStatus;
 
 namespace ChangSha_Byd_NetCore8.App.Production

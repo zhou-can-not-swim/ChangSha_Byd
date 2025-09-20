@@ -3,44 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\request\\inventoryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\request\\inventoryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\stocktaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\stocktaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\production\\stocktaskapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\production\\stocktaskapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\protocols\\qhstocker\\plchostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\protocols\\qhstocker\\plchostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\stocktaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\stocktaskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\warehousemodel\\locationapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\warehousemodel\\locationapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\request\\inventoryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\request\\inventoryrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\openauth\\infra\\response.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\openauth\\infra\\response.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\request\\stocktaskrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\request\\stocktaskrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\entities\\warehouse\\gateway.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\entities\\warehouse\\gateway.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\gatewaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\gatewaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\request\\gatewayrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\request\\gatewayrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\entities\\stocktask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\entities\\stocktask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\openauth\\app\\request\\pagereq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\openauth\\app\\request\\pagereq.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\request\\stocktaskrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\request\\stocktaskrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\app\\warehousemodel\\locationapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\app\\warehousemodel\\locationapp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\locationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\locationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\protocols\\qhstocker\\plchostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\protocols\\qhstocker\\plchostedservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\entities\\stocktask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\entities\\stocktask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -69,14 +89,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\productionlogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\productionlogcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\locationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\locationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\gatewaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|solutionrelative:changsha_byd_netcore8\\controllers\\gatewaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39FD0CDF-C18F-4D8F-ACDA-9C3258A83030}|ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8.csproj|c:\\users\\qiyu.zhou\\desktop\\changsha_byd\\changsha_byd_netcore8\\changsha_byd_netcore8\\controllers\\equipmentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -154,7 +166,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -178,15 +190,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "InventoryRequest.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAIAwwCEAAAAvAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Response.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIAwwBIAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-18T01:33:38.517Z",
+              "WhenOpened": "2025-09-16T05:28:50.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StockTaskController.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
+              "ViewState": "AgIAAJcAAAAAAAAAAIAwwGkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T01:33:26.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "StockTaskRequest.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAIAwwGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T02:25:27.757Z",
               "EditorCaption": ""
             },
             {
@@ -197,40 +235,91 @@
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
               "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
               "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Production\\StockTaskApp.cs",
-              "ViewState": "AgIAAFEGAAAAAAAAAIAwwGUGAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAFkCAAAAAAAAAIAwwIECAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-17T01:13:34.432Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StockTaskController.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\StockTaskController.cs",
-              "ViewState": "AgIAAMIAAAAAAAAAAIAwwOMAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "InventoryRequest.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Request\\InventoryRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIAwwCAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T01:33:26.074Z",
+              "WhenOpened": "2025-09-18T01:33:38.517Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Response.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\OpenAuth\\Infra\\Response.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
+              "Title": "Gateway.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Entities\\WareHouse\\Gateway.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Entities\\WareHouse\\Gateway.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Entities\\WareHouse\\Gateway.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Entities\\WareHouse\\Gateway.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T05:28:50.655Z",
+              "WhenOpened": "2025-09-20T03:50:40.856Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
+              "Title": "GatewayController.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T01:15:41.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GatewayRequest.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\GatewayRequest.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Request\\GatewayRequest.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\GatewayRequest.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Request\\GatewayRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-20T03:42:19.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Program.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Program.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Program.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAIAwwF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T03:13:58.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LocationController.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T01:30:36.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "PlcHostedService.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\PlcHostedService.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\PlcHostedService.cs",
@@ -238,25 +327,36 @@
               "RelativeToolTip": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\PlcHostedService.cs",
               "ViewState": "AgIAABYAAAAAAAAAAIAwwC4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T03:09:07.936Z",
+              "WhenOpened": "2025-09-16T03:09:07.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PageReq.cs",
+              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\OpenAuth\\App\\Request\\PageReq.cs",
+              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\OpenAuth\\App\\Request\\PageReq.cs",
+              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\OpenAuth\\App\\Request\\PageReq.cs",
+              "RelativeToolTip": "ChangSha_Byd_NetCore8\\OpenAuth\\App\\Request\\PageReq.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T09:07:27.497Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "LocationApp.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
               "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
               "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\WarehouseModel\\LocationApp.cs",
-              "ViewState": "AgIAAFUBAAAAAAAAAAAhwIoCAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-18T03:07:09.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-18T03:07:09.69Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\appsettings.json",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\appsettings.json",
@@ -268,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Properties\\launchSettings.json",
@@ -280,20 +380,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Program.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Program.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Program.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Program.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAwwE8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T03:13:58.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "InventoryController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\InventoryController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\InventoryController.cs",
@@ -301,12 +388,11 @@
               "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\InventoryController.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAAACYAAABqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T01:15:59.467Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-17T01:15:59.467Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "StockTask.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Entities\\StockTask.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Entities\\StockTask.cs",
@@ -318,19 +404,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "StockTaskRequest.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\App\\Request\\StockTaskRequest.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T02:25:27.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "TestHomeController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\TestHomeController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\TestHomeController.cs",
@@ -342,7 +416,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "WarehouseController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\WarehouseController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\WarehouseController.cs",
@@ -354,7 +428,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "StockTaskHistoryController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\StockTaskHistoryController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\StockTaskHistoryController.cs",
@@ -366,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "StateController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\StateController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\StateController.cs",
@@ -378,7 +452,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "ProductionLogController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\ProductionLogController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\ProductionLogController.cs",
@@ -390,31 +464,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "LocationController.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\LocationController.cs",
-              "ViewState": "AgIAALgAAAAAAAAAAAAYwBwAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T01:30:36.714Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "GatewayController.cs",
-              "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
-              "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
-              "ToolTip": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
-              "RelativeToolTip": "ChangSha_Byd_NetCore8\\Controllers\\GatewayController.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T01:15:41.121Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "EquipmentController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\EquipmentController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\EquipmentController.cs",
@@ -426,7 +476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "CarTypeController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\CarTypeController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\CarTypeController.cs",
@@ -438,7 +488,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "AreaController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\AreaController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\AreaController.cs",
@@ -450,7 +500,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "Area_CarType_GateWayController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\Area_CarType_GateWayController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\Area_CarType_GateWayController.cs",
@@ -462,7 +512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 38,
               "Title": "\u65B0\u5EFA\u6587\u4EF6",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\\u65B0\u5EFA\u6587\u4EF6",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\\u65B0\u5EFA\u6587\u4EF6",
@@ -474,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "HeartBeatMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\HeartBeatMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\HeartBeatMiddleware.cs",
@@ -486,7 +536,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "EntryArrivedMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\EntryArrivedMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\EntryArrivedMiddleware.cs",
@@ -498,7 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "ZBotuController.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Controllers\\ZBotuController.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Controllers\\ZBotuController.cs",
@@ -510,7 +560,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 30,
               "Title": "PublishNotificationMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\PublishNotification\\PublishNotificationMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\PublishNotification\\PublishNotificationMiddleware.cs",
@@ -522,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "FinishedTaskMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\FinishedTaskMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\FinishedTaskMiddleware.cs",
@@ -535,7 +585,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 32,
               "Title": "ScanProcessor.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\ScanProcessor.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\ScanProcessor.cs",
@@ -547,7 +597,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 31,
               "Title": "WorkBuilder.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\fan\\middlewares\\WorkBuilder.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\fan\\middlewares\\WorkBuilder.cs",
@@ -559,7 +609,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 34,
               "Title": "FlushPendingMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\FlushPendingMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\FlushPendingMiddleware.cs",
@@ -571,7 +621,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 33,
               "Title": "SendTaskMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\SendTaskMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\SendTaskMiddleware.cs",
@@ -584,7 +634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 35,
               "Title": "ReadAndWritePlcMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\ReadAndWritePlcMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\ReadAndWritePlcMiddleware.cs",
@@ -596,7 +646,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 36,
               "Title": "RequestTaskMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\RequestTaskMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\RequestTaskMiddleware.cs",
@@ -608,7 +658,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 37,
               "Title": "RequestOutTaskMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\qiyu.zhou\\Desktop\\Changsha_Byd\\ChangSha_Byd_NetCore8\\ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\RequestOutTaskMiddleware.cs",
               "RelativeDocumentMoniker": "ChangSha_Byd_NetCore8\\Protocols\\QHStocker\\Middlewares\\RequestOutTaskMiddleware.cs",
